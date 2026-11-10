@@ -10,343 +10,7 @@
 <link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
 <link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png">
 <link rel="apple-touch-icon" href="img/favicon-192.png">
-<style>
-@font-face{font-family:'Vazirmatn';font-style:normal;font-weight:400;font-display:swap;src:url('fonts/Vazirmatn-Regular.woff2') format('woff2');}
-@font-face{font-family:'Vazirmatn';font-style:normal;font-weight:500;font-display:swap;src:url('fonts/Vazirmatn-Medium.woff2') format('woff2');}
-@font-face{font-family:'Vazirmatn';font-style:normal;font-weight:600;font-display:swap;src:url('fonts/Vazirmatn-SemiBold.woff2') format('woff2');}
-@font-face{font-family:'Vazirmatn';font-style:normal;font-weight:700;font-display:swap;src:url('fonts/Vazirmatn-Bold.woff2') format('woff2');}
-@font-face{font-family:'Vazirmatn';font-style:normal;font-weight:800;font-display:swap;src:url('fonts/Vazirmatn-ExtraBold.woff2') format('woff2');}
-@font-face{font-family:'Vazirmatn';font-style:normal;font-weight:900;font-display:swap;src:url('fonts/Vazirmatn-Black.woff2') format('woff2');}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Vazirmatn',sans-serif;direction:rtl;background:#FAF7F2;color:#2B2118;-webkit-font-smoothing:antialiased;min-height:100vh}
-img{display:block;max-width:100%}
-a{text-decoration:none;color:inherit}
-ul{list-style:none}
-button{font-family:inherit;cursor:pointer}
-.wrap{max-width:1360px;margin:0 auto;padding:0 40px}
-#cats,#hot,#deals,#reviews,#blog,#wholesale,#faq,#print,#about,#contact{scroll-margin-top:16px}
-
-body{background:#F2EFE9}
-.hd{background:#F2EFE9;position:relative}
-.hd .wrap{display:flex;align-items:center;justify-content:space-between;height:76px}
-.nav{display:flex;gap:28px;font-size:14.5px;font-weight:600;color:#4A3B2C}
-.ic{display:flex;gap:12px}
-.ic .b{width:40px;height:40px;border-radius:12px;background:#fff;border:1px solid #E3DACA;display:flex;align-items:center;justify-content:center;font-size:16px;padding:0}
-.mburger{display:none}
-.mnav{display:none}
-.intro{padding:44px 0 26px;display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
-.intro h1{font-size:44px;font-weight:900;line-height:1.35;max-width:640px}
-.intro h1 span{color:#9C5B2E}
-.intro p{font-size:15.5px;color:#6E5A48;line-height:2;max-width:400px}
-.searchbig{display:flex;align-items:center;background:#fff;border:1px solid #E3DACA;border-radius:99px;padding:8px 8px 8px 22px;height:56px;gap:12px;color:#8A7A66;font-size:14.5px}
-.searchbig input{flex:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;color:#2B2118}
-.searchbig input::placeholder{color:#8A7A66}
-.searchbig .btn{background:#9C5B2E;color:#fff;padding:12px 26px;border-radius:99px;font-size:14px;font-weight:700;border:0;white-space:nowrap}
-.catgrid{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:215px;gap:16px}
-.cc{position:relative;border-radius:22px;overflow:hidden;display:flex;align-items:flex-end}
-.cc img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:.3s}
-.cc:hover img{transform:scale(1.04)}
-.cc .ov{position:relative;z-index:2;width:100%;background:linear-gradient(transparent,rgba(28,20,12,.82));color:#FAF7F2;padding:36px 22px 18px;display:flex;align-items:flex-end;justify-content:space-between}
-.cc b{font-size:20px;font-weight:800;display:block}
-.cc span{font-size:12.5px;opacity:.85}
-.cc .go{width:40px;height:40px;border-radius:50%;background:#FAF7F2;color:#2B2118;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;flex-shrink:0;margin-right:10px}
-.cc.wide{grid-column:span 2}
-.sec{padding:48px 0 0}
-.head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:24px}
-.head h2{font-size:30px;font-weight:900}
-.head .more{font-size:14px;font-weight:700;color:#9C5B2E}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.pcard{background:#fff;border:1px solid #E6DECE;border-radius:18px;overflow:hidden}
-.pimg{position:relative;background:#F1ECDF}
-.pimg img{height:220px;width:100%;object-fit:cover}
-.ptag{position:absolute;top:12px;right:12px;background:#fff;color:#9C5B2E;border:1px solid #E6DECE;font-size:11px;font-weight:700;padding:5px 12px;border-radius:99px}
-.pinfo{padding:14px 16px}
-.pname{font-size:15px;font-weight:700}
-.pcat{font-size:12px;color:#8A7660}
-.pfoot{display:flex;align-items:center;justify-content:space-between;margin-top:10px;gap:8px}
-.pprice{font-size:15.5px;font-weight:800}
-.pprice small{font-size:11px;color:#8A7660}
-.pold{font-size:12px;color:#B7A88F;text-decoration:line-through}
-.padd{width:32px;height:32px;border-radius:50%;background:#9C5B2E;color:#fff;display:flex;align-items:center;justify-content:center;font-size:17px;border:0;flex-shrink:0}
-.padd:hover{background:#7E4A24}
-.nores{display:none;text-align:center;background:#fff;border:1px dashed #E6DECE;border-radius:18px;padding:28px 16px;font-size:14.5px;color:#6E5A48;margin-top:2px}
-.nores a{color:#9C5B2E;font-weight:800}
-.wideband{margin-top:52px;border-radius:24px;overflow:hidden;position:relative;background:#2B2118;color:#FAF7F2;display:flex;align-items:center}
-.wideband img{width:46%;height:330px;object-fit:cover}
-.wideband .tx{padding:0 44px}
-.wideband .k{color:#F3C98B;font-size:13px;font-weight:800;letter-spacing:1px;margin-bottom:12px}
-.wideband h3{font-size:30px;font-weight:900;margin-bottom:12px;line-height:1.5}
-.wideband p{color:#C9BBA6;font-size:14.5px;line-height:2;margin-bottom:20px}
-.wideband .btn{background:#F3C98B;color:#2B2118;padding:13px 30px;border-radius:13px;font-weight:800;font-size:14.5px;display:inline-block}
-.ft{background:#2B2118;color:#D8CFC2;margin-top:56px}
-.ft .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;padding:44px 0 0}
-.ft h4{color:#FAF7F2;font-size:15px;margin-bottom:14px}
-.ft li{font-size:13.5px;margin-bottom:9px}
-.ft a:hover{color:#F3C98B}
-.ft .base{border-top:1px solid rgba(250,247,242,.14);margin-top:32px;padding:16px 0;font-size:12.5px;display:flex;justify-content:space-between}
-.toast{position:fixed;bottom:24px;right:50%;transform:translateX(50%);background:#2B2118;color:#FAF7F2;padding:12px 24px;border-radius:99px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:.25s;z-index:99;box-shadow:0 8px 24px rgba(0,0,0,.28);max-width:92vw;text-align:center}
-.toast.on{opacity:1}
-
-/* --- mid screens (interpolation; approved desktop >=1100, approved mobile <=768) --- */
-@media(max-width:1100px){
-.intro{flex-direction:column;align-items:flex-start;gap:14px}
-.intro h1{font-size:38px}
-.intro p{max-width:none}
-}
-@media(max-width:900px){
-.grid{grid-template-columns:repeat(2,1fr)}
-.catgrid{grid-auto-rows:180px}
-.wideband img{height:280px}
-.ft .wrap{grid-template-columns:1fr 1fr}
-}
-
-/* --- mobile: exactly the approved 390px design --- */
-@media(max-width:768px){
-.wrap{max-width:100%;padding:0 18px}
-.nav{display:none}
-.hd .lk-sub{display:none}
-.hd .wrap{height:58px}
-.mburger{display:flex;width:40px;height:40px;border-radius:12px;background:#fff;border:1px solid #E2D8C8;color:#2B2118;font-size:19px;font-weight:900;align-items:center;justify-content:center;flex-shrink:0;padding:0}
-.mnav{display:block;position:absolute;top:100%;right:0;left:0;background:#FAF7F2;border-bottom:1px solid #E3DACA;box-shadow:0 14px 30px rgba(28,20,12,.12);z-index:50;padding:6px 18px 14px;visibility:hidden;opacity:0;transform:translateY(-6px);transition:.2s}
-.mnav.open{visibility:visible;opacity:1;transform:none}
-.mnav a{display:block;padding:12px 4px;font-weight:700;font-size:15px;color:#4A3B2C;border-bottom:1px dashed #E7DCCB}
-.mnav a:last-child{border-bottom:none}
-section.sec{padding:34px 0}
-.grid{grid-template-columns:repeat(2,1fr);gap:12px}
-.pimg img{height:150px}
-.ft .wrap{grid-template-columns:1fr 1fr;gap:18px;padding:32px 0 0}
-.ft .base{flex-wrap:wrap;gap:6px;flex-direction:column;text-align:center}
-.intro{flex-direction:column;align-items:flex-start;gap:12px;padding:30px 0 18px}
-.intro h1{font-size:29px}
-.intro p{font-size:13.5px}
-.searchbig{height:50px;font-size:12px;padding-left:14px}
-.searchbig span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.searchbig .btn{padding:10px 16px;font-size:12.5px}
-.catgrid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;grid-auto-flow:dense;gap:10px}
-.cc{border-radius:16px}
-.cc.wide{grid-column:span 2}
-.cc b{font-size:15px}
-.cc .go{width:34px;height:34px;font-size:15px}
-.head h2{font-size:23px}
-.wideband{flex-direction:column;align-items:stretch;margin-top:40px}
-.wideband img{width:100%;height:180px}
-.wideband .tx{padding:22px 20px}
-.wideband h3{font-size:21px}
-.ft{margin-top:40px}
-}
-@media(max-width:352px){
-.catgrid{grid-template-columns:1fr}
-.cc.wide{grid-column:span 1}
-}
-/* ===== v1.1: topbar, mega, chips, deals, cards, reviews, blog, wholesale, faq, seo, footer, modals ===== */
-.topbar{background:#2B2118;color:#E9DFD2;font-size:12.5px}
-.topbar .wrap{display:flex;align-items:center;justify-content:space-between;height:36px;gap:12px}
-.tb-r{display:flex;align-items:center;gap:12px;white-space:nowrap}
-.tb-r a{color:#F3C98B;font-weight:700}
-.tb-soc{display:flex;gap:7px}
-.tb-soc a{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:13px}
-.soc-tg{background:#2AA5E0}.soc-wa{background:#2FB56B}.soc-bl{background:#3D6FE0}
-.nav>li{position:relative}
-.nav .has-mega>a::after{content:'▾';font-size:10px;margin-right:4px;opacity:.7}
-.mega{position:absolute;top:calc(100% + 12px);right:-20px;width:730px;max-width:calc(100vw - 32px);background:#fff;border:1px solid #E3DACA;border-radius:18px;box-shadow:0 24px 60px rgba(28,20,12,.16);padding:20px;display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;opacity:0;visibility:hidden;transform:translateY(8px);transition:.18s;z-index:60}
-.nav li:hover .mega,.nav li:focus-within .mega{opacity:1;visibility:visible;transform:none}
-.mega h5{font-size:13.5px;font-weight:800;color:#9C5B2E;margin-bottom:8px;padding-bottom:7px;border-bottom:1px dashed #EADFCB}
-.mega a.mi{display:block;font-size:12.5px;color:#5C4B3A;padding:4.5px 0}
-.mega a.mi:hover{color:#9C5B2E}
-.mega .mnote{grid-column:1/-1;border-top:1px dashed #EADFCB;padding-top:10px;font-size:12px;color:#8A7660;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
-.mega .mnote b{color:#2B2118}
-.ic .b{position:relative}
-.wlbadge{position:absolute;top:-5px;left:-5px;background:#9C5B2E;color:#fff;font-size:10px;font-weight:800;min-width:16px;height:16px;border-radius:99px;display:flex;align-items:center;justify-content:center;padding:0 3px}
-.wlbadge:empty{display:none}
-.chips{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:20px}
-.chip{display:flex;flex-direction:column;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:#4A3B2C;background:none;border:0;padding:0}
-.chip .cc2{width:76px;height:76px;border-radius:50%;overflow:hidden;border:2px solid #E3DACA;box-shadow:0 4px 14px rgba(28,20,12,.08);transition:.2s;background:#E7DCCB}
-.chip:hover .cc2{border-color:#9C5B2E;transform:translateY(-3px)}
-.chip img{width:100%;height:100%;object-fit:cover}
-.deals{margin-top:42px}
-.dealband{background:#2B2118;border-radius:22px;color:#FAF7F2;padding:20px 22px;display:grid;grid-template-columns:220px 1fr;gap:22px;align-items:center}
-.dtitle{font-size:19px;font-weight:900;line-height:1.6}
-.dtitle .k{color:#F3C98B;font-size:11.5px;font-weight:800;letter-spacing:1px;display:block;margin-bottom:5px}
-.timer{display:flex;gap:8px;margin-top:12px}
-.tbox{background:rgba(250,247,242,.08);border:1px solid rgba(250,247,242,.18);border-radius:12px;min-width:52px;padding:8px 6px;text-align:center}
-.tbox b{display:block;font-size:20px;font-weight:900;color:#F3C98B;font-variant-numeric:tabular-nums}
-.tbox span{font-size:10.5px;color:#C9BBA6}
-.dnote{color:#C9BBA6;font-size:11.5px;margin-top:10px;line-height:1.8}
-.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.dcard{background:#FAF7F2;color:#2B2118;border-radius:16px;padding:12px;display:flex;gap:12px;align-items:center}
-.dcard img{width:86px;height:86px;border-radius:12px;object-fit:cover;flex-shrink:0}
-.dcard .dn{font-size:13.5px;font-weight:800;line-height:1.7}
-.dcard .dp{margin-top:5px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.dcard .np{font-size:15px;font-weight:900;color:#9C5B2E}
-.dcard .op{font-size:11.5px;color:#B7A88F;text-decoration:line-through}
-.dcard .off{background:#9C5B2E;color:#fff;font-size:10.5px;font-weight:800;border-radius:99px;padding:2px 9px}
-.insttag{background:#EAF7EF;color:#1F7A45;border:1px solid #BFE5CD;font-size:10.5px;font-weight:800;border-radius:99px;padding:2.5px 10px;display:inline-flex;align-items:center;gap:4px;margin-top:7px}
-.prate{display:flex;align-items:center;gap:5px;font-size:11.5px;color:#8A7660;margin-top:6px}
-.prate .st{color:#E8A93D;font-size:12px;letter-spacing:1px}
-.psw{display:flex;align-items:center;gap:5px;margin-top:9px}
-.psw i{width:16px;height:16px;border-radius:50%;border:2px solid #fff;outline:1px solid #D8CCB8;cursor:pointer;transition:.15s}
-.psw i.on{outline:2px solid #9C5B2E;transform:scale(1.12)}
-.psw .more{font-size:10.5px;font-weight:800;color:#9C5B2E;cursor:pointer;background:none;border:0;padding:0 2px}
-.ptag.inst{top:auto;bottom:12px;background:#EAF7EF;color:#1F7A45;border-color:#BFE5CD}
-.pacts{position:absolute;bottom:10px;left:10px;display:flex;flex-direction:column;gap:6px;opacity:0;transform:translateX(-6px);transition:.2s;z-index:3}
-.pcard:hover .pacts{opacity:1;transform:none}
-.pacts button{width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid #E3DACA;font-size:14px;display:flex;align-items:center;justify-content:center;color:#4A3B2C;box-shadow:0 4px 12px rgba(28,20,12,.12);transition:.15s;padding:0}
-.pacts button:hover,.pacts button.on{background:#9C5B2E;color:#fff;border-color:#9C5B2E}
-.rsum{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid #E6DECE;border-radius:18px;padding:14px 20px;margin-bottom:16px;flex-wrap:wrap}
-.rsum .big{font-size:34px;font-weight:900;color:#9C5B2E;line-height:1}
-.rsum .st{color:#E8A93D;font-size:15px;letter-spacing:2px}
-.rsum>span{font-size:12.5px;color:#8A7660}
-.rsum .sep{border-right:1px solid #E7DCCB;padding-right:16px}
-.rgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-.rcard{background:#fff;border:1px solid #E6DECE;border-radius:18px;padding:18px}
-.rhead{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.rav{width:44px;height:44px;border-radius:50%;background:#F1E7D4;color:#9C5B2E;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;flex-shrink:0}
-.rname{font-size:14px;font-weight:800}
-.rcity{font-size:11.5px;color:#8A7660}
-.rstars{margin-right:auto;color:#E8A93D;font-size:13px;letter-spacing:2px;white-space:nowrap}
-.rtext{font-size:13.5px;color:#5C4B3A;line-height:2.1}
-.rmeta{margin-top:10px;display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:#8A7660}
-.rvf{color:#1F7A45;font-weight:800}
-.bgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.bcard{background:#fff;border:1px solid #E6DECE;border-radius:18px;overflow:hidden;cursor:pointer;transition:.2s;text-align:right;padding:0;display:block}
-.bcard:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(28,20,12,.1)}
-.bcard .bimg{position:relative;display:block;height:140px}
-.bcard .bimg img{width:100%;height:100%;object-fit:cover}
-.bcard .bcat{position:absolute;top:10px;right:10px;background:rgba(43,33,24,.85);color:#F3C98B;font-size:10.5px;font-weight:700;border-radius:99px;padding:3px 10px}
-.bcard .bx{display:block;padding:13px 15px}
-.bcard b{font-size:13.5px;font-weight:800;display:block;line-height:1.9}
-.bcard .bm{font-size:11px;color:#8A7660;margin-top:8px;display:flex;gap:12px}
-.wform{background:#fff;border:1px solid #E6DECE;border-radius:24px;padding:30px;display:grid;grid-template-columns:1.15fr .85fr;gap:30px;align-items:start}
-.wform h3{font-size:22px;font-weight:900;margin-bottom:6px}
-.wform .sub{font-size:13px;color:#8A7660;line-height:1.9;margin-bottom:18px}
-.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
-.fld{display:flex;flex-direction:column;gap:6px}
-.fld label{font-size:12px;font-weight:700;color:#4A3B2C}
-.fld input,.fld select,.fld textarea{border:1px solid #E3DACA;border-radius:12px;padding:11px 14px;font:inherit;font-size:13.5px;background:#FBF9F4;outline:0;color:#2B2118;width:100%}
-.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:#9C5B2E}
-.chk{display:flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:#4A3B2C}
-.wbtn{background:#9C5B2E;color:#fff;border:0;border-radius:14px;padding:14px 26px;font-size:14.5px;font-weight:800;width:100%;display:inline-block;text-align:center}
-.wbtn:hover{background:#7E4A24}
-.wside{background:#F6F1E6;border-radius:20px;padding:20px}
-.wside h4{font-size:14.5px;font-weight:800;margin-bottom:12px}
-.wside li{font-size:12.5px;color:#5C4B3A;display:flex;gap:8px;margin-bottom:9px;line-height:1.9}
-.wside li::before{content:'✓';color:#1F7A45;font-weight:900}
-.faqwrap{max-width:940px;margin:0 auto}
-.faq{background:#fff;border:1px solid #E6DECE;border-radius:16px;margin-bottom:10px;overflow:hidden}
-.faq summary{list-style:none;cursor:pointer;padding:15px 18px;font-size:14px;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:12px}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::after{content:'+';font-size:18px;color:#9C5B2E;font-weight:900;transition:.2s}
-.faq[open] summary::after{transform:rotate(45deg)}
-.faq .fa-b{padding:0 18px 16px;font-size:13.5px;color:#5C4B3A;line-height:2.2}
-.faq .fa-b b{color:#2B2118}
-.seo{background:#fff;border:1px solid #E6DECE;border-radius:24px;padding:34px 36px;margin-top:48px}
-.seo h2{font-size:21px;font-weight:900;margin-bottom:14px}
-.seo h3{font-size:15.5px;font-weight:800;margin:18px 0 8px;color:#9C5B2E}
-.seo p{font-size:13.5px;color:#5C4B3A;line-height:2.2;margin-bottom:10px}
-.seo a{color:#9C5B2E;font-weight:700}
-.ft .soc{display:flex;gap:8px;margin-top:14px}
-.ft .soc a{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
-.badges{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
-.badge{background:rgba(250,247,242,.06);border:1px solid rgba(250,247,242,.16);border-radius:14px;padding:10px 12px;display:flex;align-items:center;gap:9px;font-size:10.5px;color:#C9BBA6;line-height:1.6;width:160px}
-.badge .bi{width:34px;height:34px;border-radius:10px;background:rgba(243,201,139,.14);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.badge b{display:block;font-size:11.5px;color:#FAF7F2}
-.modal{position:fixed;inset:0;background:rgba(28,20,12,.55);display:flex;align-items:center;justify-content:center;padding:18px;z-index:100;opacity:0;visibility:hidden;transition:.2s}
-.modal.on{opacity:1;visibility:visible}
-.mbox{background:#FAF7F2;border-radius:22px;max-width:560px;width:100%;max-height:88vh;overflow:auto;padding:24px;position:relative;transform:translateY(10px);transition:.2s}
-.modal.on .mbox{transform:none}
-.mclose{position:absolute;top:14px;left:14px;width:34px;height:34px;border-radius:50%;background:#fff;border:1px solid #E3DACA;font-size:14px;font-weight:900;color:#4A3B2C;z-index:2}
-.mbox h3{font-size:18px;font-weight:900;margin-bottom:4px;padding-left:40px}
-.mcat{font-size:12px;color:#8A7660;margin-bottom:14px}
-.qv{display:grid;grid-template-columns:200px 1fr;gap:18px;align-items:start}
-.qv img{width:100%;height:210px;object-fit:cover;border-radius:16px}
-.qprice{font-size:20px;font-weight:900;color:#9C5B2E;margin-top:8px}
-.qold{font-size:13px;color:#B7A88F;text-decoration:line-through}
-.pal{display:grid;grid-template-columns:repeat(8,1fr);gap:7px;margin-top:8px}
-.pal i{height:26px;border-radius:8px;cursor:pointer;outline:1px solid rgba(0,0,0,.08);transition:.15s}
-.pal i.on{outline:2.5px solid #9C5B2E;outline-offset:1px}
-.qnote{font-size:11.5px;color:#8A7660;margin-top:10px;line-height:1.9}
-.cmp-tray{position:fixed;bottom:18px;right:50%;transform:translateX(50%) translateY(130%);background:#2B2118;color:#FAF7F2;border-radius:99px;padding:10px 14px;display:flex;align-items:center;gap:10px;z-index:90;transition:.25s;box-shadow:0 12px 30px rgba(0,0,0,.3)}
-.cmp-tray.on{transform:translateX(50%)}
-.cmp-tray .cts{display:flex;gap:6px}
-.cmp-tray .cts span{width:26px;height:26px;border-radius:50%;background:rgba(250,247,242,.14);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800}
-.cmp-tray button{background:#F3C98B;border:0;color:#2B2118;border-radius:99px;padding:9px 18px;font-weight:800;font-size:13px;font-family:inherit}
-.cmp-tray .cx{background:none;border:0;color:#C9BBA6;font-size:14px;padding:9px 4px}
-.ctable{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px}
-.ctable th,.ctable td{border:1px solid #E7DCCB;padding:9px 10px;text-align:center}
-.ctable th{background:#F6F1E6;font-weight:800}
-.ctable td:first-child,.ctable th:first-child{background:#F6F1E6;font-weight:700;white-space:nowrap}
-.ctable img{width:70px;height:56px;object-fit:cover;border-radius:10px;margin:0 auto}
-.trk-in{display:flex;gap:8px;margin-bottom:16px}
-.trk-in input{flex:1;border:1px solid #E3DACA;border-radius:12px;padding:11px 14px;font:inherit;font-size:13.5px;background:#fff;outline:0;min-width:0}
-.trk-in button{background:#9C5B2E;color:#fff;border:0;border-radius:12px;padding:0 20px;font-weight:800;font-size:13.5px;font-family:inherit}
-.trk-err{display:none;background:#FDF0EE;border:1px solid #F3CFC9;color:#B23A2E;font-size:12.5px;border-radius:12px;padding:10px 14px;margin-bottom:12px}
-.trk-ok{font-size:12.5px;color:#1F7A45;font-weight:700;margin-bottom:14px}
-.trk-step{display:flex;gap:12px;align-items:flex-start;position:relative;padding-bottom:18px}
-.trk-step::before{content:'';position:absolute;right:13px;top:30px;bottom:2px;width:2px;background:#E7DCCB}
-.trk-step:last-child::before{display:none}
-.trk-step .dot{width:28px;height:28px;border-radius:50%;background:#E7DCCB;color:#8A7660;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;z-index:1}
-.trk-step.done .dot{background:#1F7A45;color:#fff}
-.trk-step.cur .dot{background:#9C5B2E;color:#fff;box-shadow:0 0 0 4px rgba(156,91,46,.18)}
-.trk-step b{font-size:13px;display:block}
-.trk-step span{font-size:11.5px;color:#8A7660}
-.art p{font-size:13.5px;line-height:2.2;color:#5C4B3A;margin-bottom:8px}
-.art ul{margin:0 0 8px;padding-right:18px;list-style:disc}
-.art li{font-size:13.5px;line-height:2.1;color:#5C4B3A;margin-bottom:4px}
-.art .am{font-size:11.5px;color:#8A7660;margin-bottom:10px}
-.pfinv{background:#fff;border:1px solid #E3DACA;border-radius:16px;padding:20px;font-size:12.5px}
-.pfinv .ph{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid #2B2118;padding-bottom:10px;margin-bottom:12px}
-.pfinv .ph b{font-size:15px}
-.itab{width:100%;border-collapse:collapse;margin-top:8px}
-.itab th,.itab td{border:1px solid #E7DCCB;padding:7px 9px;text-align:center;font-size:12px}
-.itab th{background:#F6F1E6}
-.itab .tsum td{background:#FBF7EE;font-weight:800}
-.pfinv .note{font-size:10.5px;color:#8A7660;line-height:2;margin-top:10px}
-.invbtns{display:flex;gap:10px;margin-top:14px}
-.invbtns button{flex:1;border:0;border-radius:12px;padding:12px;font-weight:800;font-size:13px;font-family:inherit}
-.invbtns .pr{background:#9C5B2E;color:#fff}
-.invbtns .cl{background:#fff;border:1px solid #E3DACA;color:#4A3B2C}
-@media(max-width:768px){
-.topbar{font-size:11px}
-.topbar .wrap{height:auto;padding:7px 18px;flex-wrap:wrap;justify-content:center;gap:6px 10px}
-.tb-soc{display:none}
-.nav .mega{display:none}
-.chips{justify-content:flex-start;flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;gap:10px;scrollbar-width:none}
-.chips::-webkit-scrollbar{display:none}
-.chip{flex:0 0 auto}
-.chip .cc2{width:56px;height:56px}
-.dealband{grid-template-columns:1fr;padding:16px;gap:16px}
-.dgrid{grid-template-columns:1fr}
-.tbox{min-width:44px;padding:6px 4px}
-.tbox b{font-size:16px}
-.rsum{gap:10px;padding:12px 14px}
-.rsum .big{font-size:26px}
-.rsum .sep{border-right:0;padding-right:0}
-.rgrid{grid-template-columns:1fr}
-.bgrid{grid-template-columns:1fr 1fr;gap:10px}
-.bcard .bimg{height:96px}
-.bcard b{font-size:12px}
-.bcard .bx{padding:10px 11px}
-.wform{grid-template-columns:1fr;padding:18px;gap:18px}
-.frow{grid-template-columns:1fr}
-.qv{grid-template-columns:1fr}
-.qv img{height:170px}
-.pal{grid-template-columns:repeat(6,1fr)}
-.pacts{opacity:1;transform:none;flex-direction:row;top:10px;bottom:auto;left:10px}
-.pacts button{width:30px;height:30px;font-size:12px}
-.ptag.inst{bottom:auto;top:44px}
-.mbox{padding:18px}
-.pfinv{padding:14px}
-.invbtns button{padding:11px}
-.badge{width:100%}
-}
-@media print{
-body>*{display:none}
-.modal.on{display:block;position:absolute;inset:0;background:#fff;padding:0;opacity:1;visibility:visible;overflow:visible}
-.modal.on .mbox{max-width:none;max-height:none;border-radius:0;padding:0;background:#fff;box-shadow:none;transform:none}
-.mclose,.invbtns .cl{display:none}
-}
-</style>
+<link rel="stylesheet" href="style.css">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"تولیدی کیف سینا","alternateName":"SinaBag","url":"https://sinabag.vercel.app/","telephone":"+98-31-33334455","address":{"@type":"PostalAddress","addressLocality":"اصفهان","addressCountry":"IR"},"sameAs":["https://t.me/sinabag"]}</script>
 </head>
 <body id="top">
@@ -376,26 +40,18 @@ body>*{display:none}
 <line x1="156.00" y1="96.00" x2="160.00" y2="116.00" stroke="#2B2118" stroke-opacity="0.8" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
 </g>
 </svg><div class="lk-txt"><div class="lk-name" style="font-size:20px">کیف سینا</div><div class="lk-sub" style="font-size:9.5px">تولیدی کیف پارچه‌ای و پلاستیکی</div></div></div>
-      <ul class="nav"><li><a href="#top">خانه</a></li><li class="has-mega"><a href="#cats">فروشگاه</a><div class="mega"><div><h5>کیف پارچه‌ای</h5><a class="mi" href="#hot" data-q="توت‌بگ">توت‌بگ کانواس</a><a class="mi" href="#hot" data-q="توت‌بگ">توت‌بگ نقش‌دار</a><a class="mi" href="#hot" data-q="ساک">ساک دسته‌دار</a><a class="mi" href="#hot" data-q="ساک">ساک سفر</a></div><div><h5>کوله‌پشتی</h5><a class="mi" href="#hot" data-q="کوله‌پشتی">کوله شهری</a><a class="mi" href="#hot" data-q="کوله‌پشتی">کوله سفر</a><a class="mi" href="#hot" data-q="کوله‌پشتی">کوله مدرسه</a><a class="mi" href="#hot" data-q="کوله‌پشتی">کوله لپ‌تاپ</a></div><div><h5>کیف پلاستیکی</h5><a class="mi" href="#hot" data-q="پلاستیکی">کیف فروشگاهی</a><a class="mi" href="#hot" data-q="پلاستیکی">کیف زیپ‌دار</a><a class="mi" href="#hot" data-q="پلاستیکی">کیف رولی</a><a class="mi" href="#hot" data-q="پلاستیکی">بسته‌بندی</a></div><div><h5>ساک تبلیغاتی</h5><a class="mi" href="#print">چاپ سیلک</a><a class="mi" href="#print">چاپ دیجیتال</a><a class="mi" href="#wholesale">تیراژ عمده</a><a class="mi" href="#print">نمونه‌سازی ۴۸ ساعته</a></div><div class="mnote"><span>۳۰۰+ مدل آماده و تولید سفارشی با رنگ و ابعاد دلخواه</span><b>مشاوره: ۰۳۱-۳۳۳۳۴۴۵۵</b></div></div></li><li><a href="#deals">حراج هفته</a></li><li><a href="#blog">مجله</a></li><li><a href="#wholesale">استعلام عمده</a></li><li><a href="#about">درباره سینا</a></li><li><a href="#contact">تماس</a></li></ul>
+      <ul class="nav"><li><a href="#top">خانه</a></li><li class="has-mega"><a href="#cats">فروشگاه</a><div class="mega"><div><h5>کیف پارچه‌ای</h5><a class="mi" href="#hot" data-q="توت‌بگ">توت‌بگ کانواس</a><a class="mi" href="#hot" data-q="توت‌بگ">توت‌بگ نقش‌دار</a><a class="mi" href="#hot" data-q="ساک">ساک دسته‌دار</a><a class="mi" href="#hot" data-q="ساک">ساک سفر</a></div><div><h5>کوله‌پشتی</h5><a class="mi" href="#hot" data-q="کوله‌پشتی">کوله شهری</a><a class="mi" href="#hot" data-q="کوله‌پشتی">کوله سفر</a><a class="mi" href="#hot" data-q="کوله‌پشتی">کوله مدرسه</a><a class="mi" href="#hot" data-q="کوله‌پشتی">کوله لپ‌تاپ</a></div><div><h5>کیف پلاستیکی</h5><a class="mi" href="#hot" data-q="پلاستیکی">کیف فروشگاهی</a><a class="mi" href="#hot" data-q="پلاستیکی">کیف زیپ‌دار</a><a class="mi" href="#hot" data-q="پلاستیکی">کیف رولی</a><a class="mi" href="#hot" data-q="پلاستیکی">بسته‌بندی</a></div><div><h5>ساک تبلیغاتی</h5><a class="mi" href="wholesale.html">چاپ سیلک</a><a class="mi" href="wholesale.html">چاپ دیجیتال</a><a class="mi" href="wholesale.html">تیراژ عمده</a><a class="mi" href="wholesale.html">نمونه‌سازی ۴۸ ساعته</a></div><div class="mnote"><span>۳۰۰+ مدل آماده و تولید سفارشی با رنگ و ابعاد دلخواه</span><b>مشاوره: ۰۳۱-۳۳۳۳۴۴۵۵</b></div></div></li><li><a href="#deals">حراج هفته</a></li><li><a href="#blog">مجله</a></li><li><a href="wholesale.html">استعلام عمده</a></li><li><a href="#about">درباره سینا</a></li><li><a href="#contact">تماس</a></li></ul>
       <div class="ic"><button class="b" id="btnSearch" title="جست‌وجو" aria-label="جست‌وجو">⌕</button><button class="b" id="btnWl" title="علاقه‌مندی‌ها" aria-label="علاقه‌مندی‌ها">♡<span class="wlbadge" id="wlBadge"></span></button><button class="b" data-toast="سبد خرید به‌زودی فعال می‌شود — ثبت سفارش تلفنی: ۰۳۱-۳۳۳۳۴۴۵۵" title="سبد خرید" aria-label="سبد خرید">🛒</button></div><button class="mburger" id="burger" aria-label="منو" aria-controls="mnav">☰</button>
     </div>
-    <nav class="mnav" id="mnav"><a href="#top">خانه</a><a href="#cats">فروشگاه</a><a href="#hot" style="padding-right:18px;font-size:13px;font-weight:600">— کیف پارچه‌ای</a><a href="#hot" style="padding-right:18px;font-size:13px;font-weight:600">— کوله‌پشتی</a><a href="#hot" style="padding-right:18px;font-size:13px;font-weight:600">— کیف پلاستیکی</a><a href="#print" style="padding-right:18px;font-size:13px;font-weight:600">— ساک تبلیغاتی</a><a href="#deals">حراج هفته</a><a href="#blog">مجلهٔ سینا</a><a href="#wholesale">استعلام قیمت عمده</a><a href="#" data-modal="mTrack">پیگیری سفارش</a><a href="#faq">پرسش‌های متداول</a><a href="#about">درباره سینا</a><a href="#contact">تماس</a></nav>
+    <nav class="mnav" id="mnav"><a href="#top">خانه</a><a href="#cats">فروشگاه</a><a href="#hot" style="padding-right:18px;font-size:13px;font-weight:600">— کیف پارچه‌ای</a><a href="#hot" style="padding-right:18px;font-size:13px;font-weight:600">— کوله‌پشتی</a><a href="#hot" style="padding-right:18px;font-size:13px;font-weight:600">— کیف پلاستیکی</a><a href="#hot" data-q="ساک" style="padding-right:18px;font-size:13px;font-weight:600">— ساک تبلیغاتی</a><a href="#deals">حراج هفته</a><a href="#blog">مجلهٔ سینا</a><a href="wholesale.html">استعلام قیمت عمده</a><a href="#" data-modal="mTrack">پیگیری سفارش</a><a href="#faq">پرسش‌های متداول</a><a href="#about">درباره سینا</a><a href="#contact">تماس</a></nav>
   </header>
     <section class="intro wrap">
       <h1>دنبال چه کیفی هستی؟<br/><span>دسته‌ات را انتخاب کن.</span></h1>
       <p>بیش از ۳۰۰ مدل کیف پارچه‌ای و پلاستیکی، آماده‌ی ارسال یا تولید سفارشی با چاپ اختصاصی.</p>
     </section>
-    <div class="chips wrap" aria-label="دسته‌های پرتکرار">
-      <button class="chip" data-q=""><span class="cc2"><img loading="lazy" src="img/tote-04.jpg" alt="همه محصولات"></span>همهٔ محصولات</button>
-      <button class="chip" data-q="توت‌بگ"><span class="cc2"><img loading="lazy" src="img/tote-05.jpg" alt="توت‌بگ"></span>توت‌بگ</button>
-      <button class="chip" data-q="کوله‌پشتی"><span class="cc2"><img loading="lazy" src="img/backpack-05.jpg" alt="کوله‌پشتی"></span>کوله‌پشتی</button>
-      <button class="chip" data-q="پلاستیکی"><span class="cc2"><img loading="lazy" src="img/plastic-03.jpg" alt="کیف پلاستیکی"></span>پلاستیکی</button>
-      <button class="chip" data-q="ساک"><span class="cc2"><img loading="lazy" src="img/promo-05.jpg" alt="ساک تبلیغاتی"></span>ساک تبلیغاتی</button>
-      <button class="chip" data-q="ضدآب"><span class="cc2"><img loading="lazy" src="img/backpack-01.jpg" alt="ضدآب"></span>ضدآب</button>
-    </div>
     <section class="wrap" id="cats" style="padding-top:0">
       <form class="searchbig" id="searchform" role="search"><span aria-hidden="true">⌕</span><input id="si" type="search" placeholder="مثلاً «توت‌بگ کانواس با چاپ»…" autocomplete="off"><button class="btn" type="submit">جست‌وجو</button></form>
-      <div class="catgrid" style="margin-top:20px"><a class="cc " href="#hot"><img src="img/tote-05.jpg" alt="کیف پارچه‌ای"/><div class="ov"><div><b>کیف پارچه‌ای</b><span>۸۴ مدل — توت‌بگ و ساک</span></div><div class="go">←</div></div></a><a class="cc " href="#hot"><img src="img/backpack-05.jpg" alt="کوله‌پشتی"/><div class="ov"><div><b>کوله‌پشتی</b><span>۵۷ مدل — شهری و سفر</span></div><div class="go">←</div></div></a><a class="cc " href="#hot"><img src="img/plastic-03.jpg" alt="کیف پلاستیکی"/><div class="ov"><div><b>کیف پلاستیکی</b><span>۱۱۲ مدل — فروشگاهی و زیپ‌دار</span></div><div class="go">←</div></div></a><a class="cc wide" href="#print"><img src="img/promo-05.jpg" alt="ساک تبلیغاتی"/><div class="ov"><div><b>ساک تبلیغاتی</b><span>چاپ لوگو و تیراژ سازمانی</span></div><div class="go">←</div></div></a><a class="cc " href="#hot"><img src="img/backpack-01.jpg" alt="کیف مدرسه"/><div class="ov"><div><b>کیف مدرسه</b><span>۴۱ مدل — مقاوم و ارزان</span></div><div class="go">←</div></div></a></div>
+      <div class="catgrid" style="margin-top:20px"><a class="cc " href="#hot"><img src="img/tote-05.jpg" alt="کیف پارچه‌ای"/><div class="ov"><div><b>کیف پارچه‌ای</b><span>۸۴ مدل — توت‌بگ و ساک</span></div><div class="go">←</div></div></a><a class="cc " href="#hot"><img src="img/backpack-05.jpg" alt="کوله‌پشتی"/><div class="ov"><div><b>کوله‌پشتی</b><span>۵۷ مدل — شهری و سفر</span></div><div class="go">←</div></div></a><a class="cc " href="#hot"><img src="img/plastic-03.jpg" alt="کیف پلاستیکی"/><div class="ov"><div><b>کیف پلاستیکی</b><span>۱۱۲ مدل — فروشگاهی و زیپ‌دار</span></div><div class="go">←</div></div></a><a class="cc wide" href="#hot" data-q="ساک"><img src="img/promo-05.jpg" alt="ساک تبلیغاتی"/><div class="ov"><div><b>ساک تبلیغاتی</b><span>چاپ لوگو و تیراژ سازمانی</span></div><div class="go">←</div></div></a><a class="cc " href="#hot"><img src="img/backpack-01.jpg" alt="کیف مدرسه"/><div class="ov"><div><b>کیف مدرسه</b><span>۴۱ مدل — مقاوم و ارزان</span></div><div class="go">←</div></div></a></div>
     </section>
     <section class="sec wrap deals" id="deals">
       <div class="dealband">
@@ -416,15 +72,9 @@ body>*{display:none}
       </div>
     </section>
     <section class="sec wrap" id="hot">
-      <div class="head"><h2>داغ‌ترین‌های این هفته</h2><a class="more" href="#hot" id="clearfilter">مشاهده همه ←</a></div>
+      <div class="head"><h2>پرفروش‌های سینا</h2><a class="more" href="#hot" id="clearfilter">مشاهده همه ←</a></div>
       <div class="grid"><div class="pcard" data-name="توت‌بگ نقش گل محدود" data-price="410000" data-old="" data-cat="کیف پارچه‌ای" data-rating="۴٫۹" data-reviews="۱۸۷" data-inst="0" data-img="img/tote-04.jpg" data-search="توت‌بگ نقش گل محدود کیف پارچه‌ای نسخه محدود"><div class="pimg"><img loading="lazy" src="img/tote-04.jpg" alt="توت‌بگ نقش گل محدود"/><span class="ptag">نسخه محدود</span><div class="pacts"><button data-fav="توت‌بگ نقش گل محدود" title="افزودن به علاقه‌مندی‌ها" aria-label="افزودن به علاقه‌مندی‌ها">♡</button><button data-cmp="توت‌بگ نقش گل محدود" title="مقایسه" aria-label="مقایسه">⇄</button><button data-qv="توت‌بگ نقش گل محدود" title="مشاهده سریع" aria-label="مشاهده سریع"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div><div class="pinfo"><div class="pname">توت‌بگ نقش گل محدود</div><div class="pmeta"><span class="pcat">کیف پارچه‌ای</span></div><div class="prate"><span class="st">★★★★★</span><span>۴٫۹</span><span>(۱۸۷ دیدگاه)</span></div><div class="psw" aria-label="رنگ‌های موجود"><i style="background:#E7DCCB" data-cname="کرم شتری" title="کرم شتری" class="on"></i><i style="background:#7A2E2E" data-cname="زرشکی" title="زرشکی"></i><i style="background:#26211C" data-cname="مشکی" title="مشکی"></i><i style="background:#9C5B2E" data-cname="عسلی" title="عسلی"></i><i style="background:#3F7A63" data-cname="سبز یشمی" title="سبز یشمی"></i><button class="more" type="button">+۲۱</button></div><div class="pfoot"><div class="pprice">۴۱۰٬۰۰۰ <small>تومان</small></div><button class="padd" data-toast="«توت‌بگ نقش گل محدود» — ثبت سفارش تلفنی: ۰۳۱-۳۳۳۳۴۴۵۵" title="افزودن به سبد" aria-label="افزودن به سبد">+</button></div></div></div><div class="pcard" data-name="کوله‌پشتی سفر ضدآب" data-price="1450000" data-old="1690000" data-cat="کوله‌پشتی" data-rating="۴٫۸" data-reviews="۳۲۶" data-inst="1" data-img="img/backpack-05.jpg" data-search="کوله‌پشتی سفر ضدآب کوله‌پشتی"><div class="pimg"><img loading="lazy" src="img/backpack-05.jpg" alt="کوله‌پشتی سفر ضدآب"/><span class="ptag">ضدآب</span><span class="ptag inst">فروش اقساطی</span><div class="pacts"><button data-fav="کوله‌پشتی سفر ضدآب" title="افزودن به علاقه‌مندی‌ها" aria-label="افزودن به علاقه‌مندی‌ها">♡</button><button data-cmp="کوله‌پشتی سفر ضدآب" title="مقایسه" aria-label="مقایسه">⇄</button><button data-qv="کوله‌پشتی سفر ضدآب" title="مشاهده سریع" aria-label="مشاهده سریع"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div><div class="pinfo"><div class="pname">کوله‌پشتی سفر ضدآب</div><div class="pmeta"><span class="pcat">کوله‌پشتی</span></div><div class="prate"><span class="st">★★★★★</span><span>۴٫۸</span><span>(۳۲۶ دیدگاه)</span></div><div class="psw" aria-label="رنگ‌های موجود"><i style="background:#1F3A5F" data-cname="سرمه‌ای" title="سرمه‌ای" class="on"></i><i style="background:#26211C" data-cname="مشکی" title="مشکی"></i><i style="background:#8A7A5C" data-cname="خاکی" title="خاکی"></i><i style="background:#9A938C" data-cname="طوسی" title="طوسی"></i><i style="background:#7A2E2E" data-cname="زرشکی" title="زرشکی"></i><button class="more" type="button">+۲۱</button></div><div class="pfoot"><div class="pprice">۱٬۴۵۰٬۰۰۰ <small>تومان</small></div><span class="pold">۱٬۶۹۰٬۰۰۰ تومان</span><button class="padd" data-toast="«کوله‌پشتی سفر ضدآب» — ثبت سفارش تلفنی: ۰۳۱-۳۳۳۳۴۴۵۵" title="افزودن به سبد" aria-label="افزودن به سبد">+</button></div></div></div><div class="pcard" data-name="کیف پلاستیکی زیپ‌دار" data-price="120000" data-old="" data-cat="کیف پلاستیکی" data-rating="۴٫۶" data-reviews="۵۴۲" data-inst="0" data-img="img/plastic-04.jpg" data-search="کیف پلاستیکی زیپ‌دار جدید"><div class="pimg"><img loading="lazy" src="img/plastic-04.jpg" alt="کیف پلاستیکی زیپ‌دار"/><span class="ptag">جدید</span><div class="pacts"><button data-fav="کیف پلاستیکی زیپ‌دار" title="افزودن به علاقه‌مندی‌ها" aria-label="افزودن به علاقه‌مندی‌ها">♡</button><button data-cmp="کیف پلاستیکی زیپ‌دار" title="مقایسه" aria-label="مقایسه">⇄</button><button data-qv="کیف پلاستیکی زیپ‌دار" title="مشاهده سریع" aria-label="مشاهده سریع"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div><div class="pinfo"><div class="pname">کیف پلاستیکی زیپ‌دار</div><div class="pmeta"><span class="pcat">کیف پلاستیکی</span></div><div class="prate"><span class="st">★★★★★</span><span>۴٫۶</span><span>(۵۴۲ دیدگاه)</span></div><div class="psw" aria-label="رنگ‌های موجود"><i style="background:#F6F1E6" data-cname="شیری" title="شیری" class="on"></i><i style="background:#C9CFC5" data-cname="دوغی" title="دوغی"></i><i style="background:#7FA8CC" data-cname="آبی روشن" title="آبی روشن"></i><i style="background:#A63A2E" data-cname="قرمز آجری" title="قرمز آجری"></i><i style="background:#C9A13B" data-cname="زرد خردلی" title="زرد خردلی"></i><button class="more" type="button">+۲۱</button></div><div class="pfoot"><div class="pprice">۱۲۰٬۰۰۰ <small>تومان</small></div><button class="padd" data-toast="«کیف پلاستیکی زیپ‌دار» — ثبت سفارش تلفنی: ۰۳۱-۳۳۳۳۴۴۵۵" title="افزودن به سبد" aria-label="افزودن به سبد">+</button></div></div></div><div class="pcard" data-name="ساک دسته‌دار روزمره" data-price="320000" data-old="380000" data-cat="کیف پارچه‌ای" data-rating="۴٫۷" data-reviews="۲۹۸" data-inst="1" data-img="img/tote-05.jpg" data-search="ساک دسته‌دار روزمره کیف پارچه‌ای پرفروش"><div class="pimg"><img loading="lazy" src="img/tote-05.jpg" alt="ساک دسته‌دار روزمره"/><span class="ptag">پرفروش</span><span class="ptag inst">فروش اقساطی</span><div class="pacts"><button data-fav="ساک دسته‌دار روزمره" title="افزودن به علاقه‌مندی‌ها" aria-label="افزودن به علاقه‌مندی‌ها">♡</button><button data-cmp="ساک دسته‌دار روزمره" title="مقایسه" aria-label="مقایسه">⇄</button><button data-qv="ساک دسته‌دار روزمره" title="مشاهده سریع" aria-label="مشاهده سریع"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7S1 12 1 12z"/><circle cx="12" cy="12" r="3"/></svg></button></div></div><div class="pinfo"><div class="pname">ساک دسته‌دار روزمره</div><div class="pmeta"><span class="pcat">کیف پارچه‌ای</span></div><div class="prate"><span class="st">★★★★★</span><span>۴٫۷</span><span>(۲۹۸ دیدگاه)</span></div><div class="psw" aria-label="رنگ‌های موجود"><i style="background:#F6F1E6" data-cname="شیری" title="شیری" class="on"></i><i style="background:#E7DCCB" data-cname="کرم شتری" title="کرم شتری"></i><i style="background:#9C5B2E" data-cname="عسلی" title="عسلی"></i><i style="background:#5B7052" data-cname="سبز زیتونی" title="سبز زیتونی"></i><i style="background:#4A2C4E" data-cname="بادمجانی" title="بادمجانی"></i><button class="more" type="button">+۲۱</button></div><div class="pfoot"><div class="pprice">۳۲۰٬۰۰۰ <small>تومان</small></div><span class="pold">۳۸۰٬۰۰۰ تومان</span><button class="padd" data-toast="«ساک دسته‌دار روزمره» — ثبت سفارش تلفنی: ۰۳۱-۳۳۳۳۴۴۵۵" title="افزودن به سبد" aria-label="افزودن به سبد">+</button></div></div></div></div>
       <div class="nores" id="nores">چیزی مطابق جست‌وجو پیدا نشد — <a href="#hot" id="clearfilter2">نمایش همه محصولات</a> یا تماس: <a href="tel:+983133334455">۰۳۱-۳۳۳۳۴۴۵۵</a></div>
-    </section>
-    <section class="wrap" id="print">
-      <div class="wideband"><img loading="lazy" src="img/promo-05.jpg" alt="چاپ اختصاصی"/>
-        <div class="tx"><div class="k">SINA CUSTOM PRINT</div><h3>ساک با لوگوی خودت؛<br/>از نمونه تا تیراژ انبوه</h3><p>نمونه‌سازی ۴۸ ساعته، چاپ سیلک و دیجیتال، قیمت پلکانی کارخانه برای سفارش‌های بالای ۱۰۰ عدد.</p>
-        <a class="btn" href="tel:+983133334455">درخواست نمونه رایگان</a></div>
-      </div>
     </section>
     <section class="sec wrap" id="reviews">
       <div class="head"><h2>نظرات خریداران</h2><a class="more" href="#faq">پرسش‌های متداول ←</a></div>
@@ -446,21 +96,17 @@ body>*{display:none}
       </div>
     </section>
     <section class="sec wrap" id="wholesale">
-      <div class="head"><h2>استعلام قیمت عمده</h2><a class="more" href="tel:+983133334455">مشاوره تلفنی: ۰۳۱-۳۳۳۳۴۴۵۵</a></div>
-      <div class="wform">
-        <form id="wformF" novalidate>
-          <div class="frow"><div class="fld"><label for="wfName">نام و نام خانوادگی *</label><input id="wfName" required placeholder="مثلاً رضا احمدی"></div><div class="fld"><label for="wfTel">شماره تماس *</label><input id="wfTel" required inputmode="tel" placeholder="۰۹۱۳۰۰۰۰۰۰۰"></div></div>
-          <div class="frow"><div class="fld"><label for="wfProd">محصول</label><select id="wfProd"><option>توت‌بگ کانواس</option><option>کوله‌پشتی شهری</option><option>کوله‌پشتی سفر</option><option>کیف پلاستیکی زیپ‌دار</option><option>ساک تبلیغاتی با چاپ</option></select></div><div class="fld"><label for="wfQty">تعداد (عدد)</label><input id="wfQty" type="number" min="50" max="100000" value="200"></div></div>
-          <div class="frow"><div class="fld"><label for="wfColor">رنگ</label><select id="wfColor"><option>هر رنگ (موجودی کارخانه)</option><option>تک‌رنگ</option><option>دو رنگ مخلوط</option><option>رنگ سفارشی (پنتون)</option></select></div><div class="fld" style="justify-content:flex-end"><label class="chk" style="margin:0"><input type="checkbox" id="wfPrint" checked> چاپ لوگو (سیلک یک‌رنگ، +۲۵٬۰۰۰/عدد)</label></div></div>
-          <div class="fld" style="margin-bottom:14px"><label for="wfNote">توضیحات (اختیاری)</label><textarea id="wfNote" rows="2" placeholder="ابعاد، جنس پارچه، زمان‌بندی تحویل…"></textarea></div>
-          <button class="wbtn" type="submit">دریافت پیش‌فاکتور تخمینی</button>
-          <p style="font-size:11px;color:#8A7660;margin-top:10px;line-height:1.9">پیش‌فاکتور فوراً نمایش داده می‌شود؛ نسخهٔ رسمی پس از تماس کارشناس فروش عمده صادر می‌شود.</p>
-        </form>
-        <aside class="wside">
-          <h4>چرا خرید عمده از سینا؟</h4>
-          <ul><li>قیمت پلکانی کارخانه — تا ۱۵٪ تخفیف تیراژ بالا</li><li>نمونه‌سازی ۴۸ ساعته پیش از سفارش</li><li>چاپ سیلک و دیجیتال با رنگ ثابت</li><li>ارسال به سراسر کشور با باربری منتخب شما</li><li>امکان خرید قسطی در سفارش‌های عمده</li></ul>
-          <div style="border-top:1px dashed #E0D5C0;margin-top:14px;padding-top:12px;font-size:12.5px;line-height:2;color:#5C4B3A">حداقل سفارش عمده: <b>۱۰۰ عدد</b><br>واحد فروش: <b>همکار و سازمانی</b></div>
-        </aside>
+      <div class="wban">
+        <div class="wban-tx">
+          <span class="k">WHOLESALE — فروش عمده و سازمانی</span>
+          <h2>خرید عمده با قیمت کارخانه؛ از استعلام تا پیش‌فاکتور در یک صفحه</h2>
+          <p>برای تیراژ ۱۰۰ عدد به بالا، قیمت پلکانی کارخانه، نمونه‌سازی ۴۸ ساعته و چاپ لوگو فعال است. فرم استعلام را در صفحهٔ فروش عمده پر کنید تا پیش‌فاکتور تخمینی همان لحظه صادر شود.</p>
+          <ul class="wban-list"><li>قیمت پلکانی تا ۱۵٪ تخفیف</li><li>نمونه‌سازی ۴۸ ساعته</li><li>پیش‌فاکتور فوری</li><li>ارسال به سراسر کشور</li></ul>
+        </div>
+        <div class="wban-cta">
+          <a class="btn" href="wholesale.html">ثبت استعلام عمده ←</a>
+          <a class="wban-tel" href="tel:+983133334455">مشاوره تلفنی: ۰۳۱-۳۳۳۳۴۴۵۵</a>
+        </div>
       </div>
     </section>
     <section class="sec wrap" id="faq">
@@ -470,7 +116,7 @@ body>*{display:none}
         <details class="faq"><summary>روش‌های ارسال کدام‌اند و چقدر طول می‌کشد؟</summary><div class="fa-b">سه روش:<br>• <b>پیک درون‌شهری (اصفهان):</b> تحویل همان روز کاری<br>• <b>پست پیشتاز / تیپاکس:</b> ۲ تا ۴ روز کاری به سراسر کشور<br>• <b>مراجعه حضوری:</b> تحویل مستقیم از تولیدی در شهرک صنعتی اصفهان — بازدید از خط تولید هم آزاد است</div></details>
         <details class="faq"><summary>هزینهٔ ارسال چطور محاسبه می‌شود؟</summary><div class="fa-b">پیک بر اساس مسیر توافقی؛ پست و تیپاکس بر اساس وزن و مقصد. برای سفارش‌های بالای <b>۵٬۰۰۰٬۰۰۰ تومان</b> ارسال رایگان است.</div></details>
         <details class="faq"><summary>شرایط مرجوعی و گارانتی چیست؟</summary><div class="fa-b">تا <b>۷ روز</b> فرصت دارید کالای سالم و استفاده‌نشده را مرجوع دهید. هر ایراد دوختی، خارج از شرایط عادی استفاده، مشمول <b>تعویض یا تعمیر رایگان</b> می‌شود (گارانتی دوخت سینا).</div></details>
-        <details class="faq"><summary>چطور پیش‌فاکتور عمده بگیرم؟</summary><div class="fa-b">از بخش <a href="#wholesale" style="color:#9C5B2E;font-weight:700">استعلام قیمت عمده</a> فرم را پر کنید؛ پیش‌فاکتور تخمینی همان لحظه صادر و قابل چاپ/PDF می‌شود. نسخهٔ رسمی پس از تماس کارشناس ارسال می‌شود.</div></details>
+        <details class="faq"><summary>چطور پیش‌فاکتور عمده بگیرم؟</summary><div class="fa-b">از بخش <a href="wholesale.html" style="color:#9C5B2E;font-weight:700">استعلام قیمت عمده</a> فرم را پر کنید؛ پیش‌فاکتور تخمینی همان لحظه صادر و قابل چاپ/PDF می‌شود. نسخهٔ رسمی پس از تماس کارشناس ارسال می‌شود.</div></details>
         <details class="faq"><summary>نمونه‌سازی و چاپ اختصاصی چگونه است؟</summary><div class="fa-b">نمونه در <b>۴۸ ساعت</b> آماده می‌شود. چاپ سیلک (۱ تا ۴ رنگ) برای تیراژ بالا و چاپ دیجیتال برای طرح‌های تمام‌رنگ. حداقل تیراژ چاپ ۱۰۰ عدد است.</div></details>
         <details class="faq"><summary>سفارشم را چطور پیگیری کنم؟</summary><div class="fa-b">پس از ارسال، <b>کد مرسوله</b> پیامک می‌شود؛ آن را در «<a href="#" data-modal="mTrack" style="color:#9C5B2E;font-weight:700">پیگیری سفارش</a>» بالای سایت وارد کنید یا عضو کانال اختصاصی پیگیری مرسوله شوید تا هر تغییر وضعیت خودکار اعلام شود.</div></details>
         <details class="faq"><summary>حداقل سفارش چقدر است؟</summary><div class="fa-b">خرید تکی فقط به‌صورت تلفنی انجام می‌شود؛ خرید عمده از <b>۱۰۰ عدد</b> با قیمت پلکانی کارخانه فعال است.</div></details>
@@ -484,7 +130,7 @@ body>*{display:none}
       <h3>کوله‌پشتی؛ وزن را درست تقسیم کن</h3>
       <p>برای سفر، به درز دوبل، تسمه‌های Xشکل، زیپ درشت و کمربند سینه/کمر توجه کنید؛ همین چهار جزء، عمر کوله را چند برابر می‌کند. کف تقویت‌شده هم برای بار سنگین حیاتی است. <a href="#hot">کوله‌پشتی‌های سینا</a> با گارانتی دوخت عرضه می‌شوند.</p>
       <h3>کیف پلاستیکی؛ ارزان اما با حساب</h3>
-      <p>برای فروشگاه، میکرون مناسب (۵۰ به بالا) و جوش دستهٔ سرتاسری را شرط بخرید؛ کیف نازک‌تر در ظاهر ارزان‌تر است اما نرخ پارگی و نارضایتی مشتری را بالا می‌برد. برای تیراژ بالا، <a href="#wholesale">استعلام عمده</a> با قیمت پلکانی کارخانه در دسترس است.</p>
+      <p>برای فروشگاه، میکرون مناسب (۵۰ به بالا) و جوش دستهٔ سرتاسری را شرط بخرید؛ کیف نازک‌تر در ظاهر ارزان‌تر است اما نرخ پارگی و نارضایتی مشتری را بالا می‌برد. برای تیراژ بالا، <a href="wholesale.html">استعلام عمده</a> با قیمت پلکانی کارخانه در دسترس است.</p>
       <p>خلاصه: اول کاربری، بعد جنس و دوخت، بعد رنگ و چاپ. اگر مردد هستید، تیم فروش سینا نمونهٔ ۴۸ ساعته آماده می‌کند تا قبل از سفارش، کیفیت را با دست لمس کنید.</p>
     </div></section>
     <footer class="ft" id="contact"><div class="wrap">
@@ -514,8 +160,8 @@ body>*{display:none}
         <div class="badge"><span class="bi"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#F3C98B" stroke-width="2" stroke-linecap="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></span><span><b>درگاه پرداخت امن</b>SSL — اسنپ‌پی / ترب‌پی</span></div>
         <div class="badge"><span class="bi"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#F3C98B" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>۷ روز ضمانت مرجوعی</b>+ گارانتی دوخت</span></div>
       </div></div>
-      <div><h4>دسته‌ها</h4><ul><li><a href="#cats">کیف پارچه‌ای</a></li><li><a href="#cats">کوله‌پشتی</a></li><li><a href="#cats">کیف پلاستیکی</a></li><li><a href="#print">ساک تبلیغاتی</a></li></ul></div>
-      <div><h4>خدمات</h4><ul><li><a href="#print">چاپ اختصاصی</a></li><li><a href="#wholesale">سفارش عمده و پیش‌فاکتور</a></li><li><a href="#print">نمونه‌سازی ۴۸ ساعته</a></li><li><a href="#blog">مجلهٔ سینا</a></li><li><a href="#faq">پرسش‌های متداول</a></li><li><a href="#" data-modal="mTrack">پیگیری سفارش</a></li></ul></div>
+      <div><h4>دسته‌ها</h4><ul><li><a href="#cats">کیف پارچه‌ای</a></li><li><a href="#cats">کوله‌پشتی</a></li><li><a href="#cats">کیف پلاستیکی</a></li><li><a href="#hot" data-q="ساک">ساک تبلیغاتی</a></li></ul></div>
+      <div><h4>خدمات</h4><ul><li><a href="wholesale.html">چاپ اختصاصی</a></li><li><a href="wholesale.html">سفارش عمده و پیش‌فاکتور</a></li><li><a href="wholesale.html">نمونه‌سازی ۴۸ ساعته</a></li><li><a href="#blog">مجلهٔ سینا</a></li><li><a href="#faq">پرسش‌های متداول</a></li><li><a href="#" data-modal="mTrack">پیگیری سفارش</a></li></ul></div>
       <div><h4>تماس</h4><ul><li><a href="tel:+983133334455">۰۳۱-۳۳۳۳۴۴۵۵</a></li><li><a href="mailto:hello@sinabag.ir">hello@sinabag.ir</a></li><li>اصفهان، شهرک صنعتی</li></ul></div>
       <div class="base" style="grid-column:1/-1"><span>© ۱۴۰۵ تولیدی کیف سینا — تمام حقوق محفوظ است.</span><span>سایت رسمی | نسخه ۱٫۱</span></div>
     </div></footer>
@@ -537,10 +183,6 @@ body>*{display:none}
     <div class="modal" id="mArt" role="dialog" aria-modal="true" aria-label="مقاله"><div class="mbox" style="max-width:640px">
       <button class="mclose" data-close aria-label="بستن">✕</button><div class="art" id="artBody"></div>
     </div></div>
-    <div class="modal" id="mInv" role="dialog" aria-modal="true" aria-label="پیش‌فاکتور"><div class="mbox" style="max-width:620px">
-      <button class="mclose" data-close aria-label="بستن">✕</button><h3 style="margin-bottom:12px">پیش‌فاکتور استعلام عمده</h3><div id="pfinvBox"></div>
-      <div class="invbtns"><button class="pr" id="invPrint" type="button">چاپ / ذخیره PDF</button><button class="cl" data-close type="button">بستن</button></div>
-    </div></div>
     <div class="cmp-tray" id="cmpTray"><span style="font-size:12px;font-weight:800">مقایسه</span><div class="cts" id="cmpSlots"></div><button id="cmpGo" type="button">مشاهده</button><button class="cx" id="cmpClear" aria-label="پاک کردن مقایسه" type="button">✕</button></div>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script>
@@ -561,6 +203,8 @@ body>*{display:none}
       document.getElementById('clearfilter').addEventListener('click',clearF);
       document.getElementById('clearfilter2').addEventListener('click',clearF);
       document.getElementById('btnSearch').addEventListener('click',function(){document.getElementById('cats').scrollIntoView({behavior:'smooth'});setTimeout(function(){si.focus();},500);});
+      var qp=new URLSearchParams(location.search).get('q');
+      if(qp){si.value=qp;applyFilter();setTimeout(function(){document.getElementById('hot').scrollIntoView({behavior:'smooth'});},400);}
     })();
     </script>
     <script>
@@ -693,24 +337,6 @@ body>*{display:none}
         a4:{t:'چاپ لوگو روی ساک تبلیغاتی: سیلک، دیجیتال یا ترنسفر؟',m:'۷ دقیقه مطالعه — ۱۴۰۵/۰۷/۱۴',h:'<h4>سیلک؛ پادشاه تیراژ بالا</h4><p>برای ۱ تا ۴ رنگ و تیراژ بالای ۱۰۰ عدد، سیلک ارزان‌ترین فی واحد را می‌دهد؛ رنگ‌ها تند و ماندگارند و روی کانواس و کنف هر دو جواب می‌دهند.</p><h4>دیجیتال؛ طرح‌های پررنگ‌وپرجزئیات</h4><p>اگر لوگو گرادیان، عکس یا رنگ‌های زیاد دارد، چاپ دیجیتال انتخاب درست است؛ بدون محدودیت رنگ و مناسب تیراژ متوسط.</p><h4>ترنسفر؛ جزئیات حداکثری</h4><p>برای طرح‌های خیلی ظریف روی ساک‌های لوکس، ترنسفر کیفیت چاپخانه‌ای می‌دهد؛ فی واحد بالاتر است اما جلوهٔ برند لوکس جبران می‌کند.</p><h4>نکتهٔ فایل</h4><p>فایل چاپ را وکتور (AI/PDF) با رنگ پنتون بفرستید؛ نمونهٔ ۴۸ ساعتهٔ سینا دقیقاً همان خروجی تیراژ را نشان می‌دهد.</p>'}
       };
       document.querySelectorAll('[data-art]').forEach(function(b){b.addEventListener('click',function(){var a=ART[b.getAttribute('data-art')];document.getElementById('artBody').innerHTML='<h3 style="font-size:17px;font-weight:900;line-height:1.9">'+a.t+'</h3><div class="am"><span>'+a.m+'</span></div>'+a.h;openM('mArt');});});
-      var WPRICE={'توت‌بگ کانواس':290000,'کوله‌پشتی شهری':980000,'کوله‌پشتی سفر':1450000,'کیف پلاستیکی زیپ‌دار':110000,'ساک تبلیغاتی با چاپ':350000};
-      function tier(q){return q>=500?15:(q>=300?10:(q>=100?5:0));}
-      document.getElementById('wformF').addEventListener('submit',function(e){
-        e.preventDefault();
-        var name=document.getElementById('wfName').value.trim(),tel=document.getElementById('wfTel').value.trim();
-        if(!name){toast('نام و نام خانوادگی را وارد کنید');document.getElementById('wfName').focus();return;}
-        var telEn=toEn(tel).replace(/\D/g,'');
-        if(telEn.length<10){toast('شماره تماس معتبر وارد کنید (مثلاً ۰۹۱۳۰۰۰۰۰۰۰)');document.getElementById('wfTel').focus();return;}
-        var prod=document.getElementById('wfProd').value,q=Math.max(50,parseInt(document.getElementById('wfQty').value||'0',10)||50);
-        var unit=WPRICE[prod]||0,print=document.getElementById('wfPrint').checked&&prod!=='ساک تبلیغاتی با چاپ';
-        if(print)unit+=25000;
-        var gross=unit*q,dsc=tier(q),disc=Math.round(gross*dsc/100),net=gross-disc;
-        var dt=new Intl.DateTimeFormat('fa-IR').format(new Date());
-        var no='SINA-PF-'+Math.floor(1000+Math.random()*9000);
-        document.getElementById('pfinvBox').innerHTML='<div class="pfinv"><div class="ph"><b>تولیدی کیف سینا</b><span>شماره: '+fa(no)+'</span></div><div style="display:flex;justify-content:space-between;font-size:11.5px;color:#8A7660;margin-bottom:6px"><span>خریدار: <b style="color:#2B2118">'+name+'</b></span><span>تاریخ: '+dt+'</span></div><div style="font-size:11.5px;color:#8A7660;margin-bottom:4px">تماس: '+fa(tel)+'</div><table class="itab"><tr><th>شرح</th><th>تعداد</th><th>فی (تومان)</th><th>مبلغ کل</th></tr><tr><td>'+prod+(print?' + چاپ لوگو سیلک یک‌رنگ':'')+'</td><td>'+fa(q)+'</td><td>'+money(unit)+'</td><td>'+money(gross)+'</td></tr><tr class="tsum"><td colspan="3">تخفیف پلکانی تیراژ ('+fa(dsc)+'٪)</td><td>−'+money(disc)+'</td></tr><tr class="tsum"><td colspan="3">مبلغ قابل پرداخت</td><td><b>'+money(net)+' تومان</b></td></tr></table><div class="note">• اعتبار این پیش‌فاکتور: ۳ روز کاری — نرخ‌ها تخمینی و بر اساس تیراژ فعلی است.<br>• مالیات بر ارزش افزوده بر اساس قوانین جاری در فاکتور رسمی محاسبه می‌شود.<br>• هزینهٔ ارسال جداگانه و بر اساس مقصد و روش ارسال (پیک/پست/باربری) است.<br>• پرداخت: نقدی، کارت‌به‌کارت یا خرید قسطی (اسنپ‌پی/ترب‌پی)؛ برای عمده، تسویه توافقی.</div></div>';
-        openM('mInv');
-      });
-      document.getElementById('invPrint').addEventListener('click',function(){window.print();});
     })();
     </script>
 </body></html>
