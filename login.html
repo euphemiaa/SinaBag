@@ -60,7 +60,8 @@
           </div>
           <div id="otpStep2" style="display:none">
             <div class="ferr" id="otErr2"></div>
-            <div class="asub" style="text-align:right">کد ۶ رقمی به شمارهٔ <b id="otpShown"></b> پیامک شد.</div>
+            <div id="demoHint" style="display:none;background:#FFF7E6;border:1px dashed #C9A13B;border-radius:10px;padding:10px 14px;margin:0 0 12px;color:#8A6A1F;font-size:13.5px;font-weight:700">حالت آزمایشی — سرویس پیامک موقتاً غیرفعال است. کد ورود همگانی: <b style="letter-spacing:3px">۱۱۱۱</b></div>
+            <div class="asub" id="otpMsg" style="text-align:right">کد ۶ رقمی به شمارهٔ <b id="otpShown"></b> پیامک شد.</div>
             <div class="fld" style="margin-bottom:12px"><label for="otCode">کد تأیید</label><input id="otCode" inputmode="numeric" maxlength="6" placeholder="────────" style="text-align:center;letter-spacing:10px;font-size:19px;font-weight:800"></div>
             <button class="btnmain btnfull" type="button" id="otGo">تأیید کد و ورود</button>
             <div class="alinks"><a href="#" id="otEdit">ویرایش شماره</a><a href="#" id="otResend">ارسال دوبارهٔ کد</a></div>
@@ -109,7 +110,10 @@
           btn.disabled=false;btn.textContent='دریافت کد تأیید پیامکی';
           if(r.ok){
             tok=r.token;
-            document.getElementById('otpShown').textContent=SB.fa(ph.slice(0,4)+'***'+ph.slice(7));
+            document.getElementById('demoHint').style.display=r.demo?'block':'none';
+            document.getElementById('otpMsg').innerHTML=r.demo
+              ? 'حالت آزمایشی فعال است — برای ورود از کد همگانی استفاده کنید.'
+              : 'کد ۶ رقمی به شمارهٔ <b>'+SB.fa(ph.slice(0,4)+'***'+ph.slice(7))+'</b> پیامک شد.';
             step(1);startTimer();document.getElementById('otCode').value='';document.getElementById('otCode').focus();
           } else if(r.error==='sms-not-configured'){
             err(e,'سرویس پیامک هنوز تنظیم نشده است — دکمهٔ زیر برای ورود نمایشی فعال شد. جهت فعال‌سازی با ۰۳۱-۳۳۳۳۴۴۵۵ تماس بگیرید.');
@@ -126,7 +130,7 @@
       document.getElementById('otGo').addEventListener('click',function(){
         var e=document.getElementById('otErr2');hide(e);
         var c=SB.toEn(document.getElementById('otCode').value).replace(/[^0-9]/g,'');
-        if(c.length!==6)return err(e,'کد ۶ رقمی را کامل وارد کنید.');
+        if(c.length<4||c.length>6)return err(e,'کد تأیید را کامل وارد کنید (۴ تا ۶ رقم).');
         var btn=this;btn.disabled=true;btn.textContent='در حال بررسی…';
         post('/api/otp-verify',{phone:ph,code:c,token:tok}).then(function(r){
           btn.disabled=false;btn.textContent='تأیید کد و ورود';
