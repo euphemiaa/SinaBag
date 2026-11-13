@@ -12,7 +12,6 @@
 <link rel="apple-touch-icon" href="img/favicon-192.png">
 <link rel="stylesheet" href="style.css">
 <script>window.SB_SUPA={url:"https://pcjmzutugtsqaqubcwmt.supabase.co",key:"sb_publishable_bW59Dhz3PsDB2Hv2wgZRRQ_KhuhRygm"};</script>
-<script src="supabase.js"></script>
 <script src="products.js"></script>
 <script src="app.js"></script>
 </head>
@@ -144,10 +143,11 @@
         document.getElementById('payBtn').disabled=true;
         gw.classList.add('on');
         setTimeout(function(){
-          // real persistence: Supabase orders table + SMS notifications (non-blocking, capped at 3.5s)
-          var dbp=(window.supabase&&window.SB_SUPA)?window.supabase.createClient(window.SB_SUPA.url,window.SB_SUPA.key)
-            .from('orders').insert({order_code:o.code,customer_name:o.name,phone:o.phone,province:o.prv,city:o.city,address:o.addr,postal_code:o.zip||null,note:o.note||null,items:o.items,subtotal:o.sub,shipping:o.shipCost,total:o.total,status:'pending'})
-            .then(function(r){o.db=!r.error;return true;}).catch(function(){o.db=false;return false;})
+          // real persistence: Supabase orders table via raw REST (apikey header only — sb_publishable keys break RLS when sent as Authorization Bearer) + SMS notifications (non-blocking, capped at 3.5s)
+          var dbp=window.SB_SUPA?fetch(window.SB_SUPA.url+'/rest/v1/orders',{method:'POST',
+            headers:{'apikey':window.SB_SUPA.key,'Content-Type':'application/json','Prefer':'return=minimal'},
+            body:JSON.stringify({order_code:o.code,customer_name:o.name,phone:o.phone,province:o.prv,city:o.city,address:o.addr,postal_code:o.zip||null,note:o.note||null,items:o.items,subtotal:o.sub,shipping:o.shipCost,total:o.total,status:'pending'})
+          }).then(function(r){o.db=r.status===201;return true;}).catch(function(){o.db=false;return false;})
             :Promise.resolve(false);
           var ntf=fetch('/api/order-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({order:{code:o.code,total:o.total,name:o.name,phone:o.phone,items:o.items.length}})}).catch(function(){return null;});
           Promise.race([Promise.all([dbp,ntf]),new Promise(function(r2){setTimeout(r2,3500);})]).then(function(){SB.save('sina_order',o);SB.clear();SB.setPromo('');location.href='success.html';});
