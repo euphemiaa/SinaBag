@@ -33,6 +33,47 @@
   /* completed-orders history (localStorage, newest first, capped) */
   function orders(){return load('sina_orders',[]);}
   function pushOrder(o){var a=load('sina_orders',[]);a.unshift(o);if(a.length>50)a.length=50;save('sina_orders',a);return a;}
+  /* orders registered with the signed-in phone (legacy orders without uphone stay visible on the same device) */
+  function myOrders(){
+    var u=load('sina_user',null);var a=orders();
+    if(!u||!u.phone)return a;
+    return a.filter(function(o){return !o.uphone||o.uphone===u.phone||o.phone===u.phone;});
+  }
+
+  /* ---- per-phone cart: survives logout / re-login ---- */
+  function uCartKey(p){return 'sina_cart_u_'+(p||'');}
+  function rebind(items){cart.length=0;items.forEach(function(x){cart.push(x);});cartSave();}
+  function mergeCarts(base,extra){
+    var m=(base||[]).map(function(x){return {id:x.id,qty:x.qty,color:x.color};});
+    (extra||[]).forEach(function(it){
+      for(var i=0;i<m.length;i++){if(m[i].id===it.id&&(m[i].color||'')===(it.color||'')){m[i].qty=Math.min(99,m[i].qty+it.qty);return;}}
+      m.push({id:it.id,qty:it.qty,color:it.color||''});
+    });
+    return m;
+  }
+  /* sign-in: restore this phone's stashed cart (merging anything added anonymously) */
+  function userLogin(sess){
+    if(!sess)return sess;
+    try{
+      if(sess.phone){
+        var key=uCartKey(sess.phone),saved=load(key,null);
+        rebind(mergeCarts(saved,cart));
+        save(key,cart);
+      }
+    }catch(e){}
+    save('sina_user',sess);badge();
+    return sess;
+  }
+  /* sign-out: stash the cart under the phone so the next login brings it back */
+  function userLogout(){
+    var u=load('sina_user',null);
+    try{
+      if(u&&u.phone)save(uCartKey(u.phone),cart);
+      localStorage.removeItem('sina_user');
+    }catch(e){}
+    rebind([]);
+    return u;
+  }
 
   /* standalone printable invoice window (RTL, webfont) — shared by success + account pages */
   function printInvoice(o){
@@ -107,7 +148,8 @@
 
   window.SB={fa:fa,toEn:toEn,money:money,byId:byId,load:load,save:save,toast:toast,jdate:jdate,
     cart:cart,add:add,setQty:setQty,remove:remove,clear:clear,count:count,subtotal:subtotal,
-    promo:promo,setPromo:setPromo,discount:discount,orders:orders,pushOrder:pushOrder,printInvoice:printInvoice,
+    promo:promo,setPromo:setPromo,discount:discount,orders:orders,myOrders:myOrders,pushOrder:pushOrder,printInvoice:printInvoice,
+    userLogin:userLogin,userLogout:userLogout,
     user:function(){return load('sina_user',null);}};
 
   function bindCommon(){
