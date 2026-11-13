@@ -149,11 +149,13 @@
             body:JSON.stringify({order_code:o.code,customer_name:o.name,phone:o.phone,province:o.prv,city:o.city,address:o.addr,postal_code:o.zip||null,note:o.note||null,items:o.items,subtotal:o.sub,shipping:o.shipCost,total:o.total,status:'pending'})
           }).then(function(r){o.db=r.status===201;return true;}).catch(function(){o.db=false;return false;})
             :Promise.resolve(false);
-          var ntf=fetch('/api/order-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({order:{code:o.code,total:o.total,name:o.name,phone:o.phone,items:o.items.length}})}).catch(function(){return null;});
+          var ntf=fetch('/api/order-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({order:{code:o.code,total:o.total,name:o.name,phone:o.phone,items:o.items.length},coupon:(SB.promo()||'')})}).catch(function(){return null;});
           Promise.race([Promise.all([dbp,ntf]),new Promise(function(r2){setTimeout(r2,3500);})]).then(function(){SB.pushOrder(o);SB.save('sina_order',o);SB.clear();SB.setPromo('');location.href='success.html';});
         },1600);
       }
       render();wireCards();
+      /* re-render when the panel-edited catalog arrives from the DB */
+      SB.onProducts(function(){render();wireCards();});
     })();
     </script><footer class="ft"><div class="wrap">
       <div><a href="index.html" style="display:flex;align-items:center;gap:10px"><svg viewBox="0 0 240 240" width="50" height="50" aria-label="لوگوی تولیدی کیف سینا">
@@ -185,7 +187,7 @@
       <div><h4>دسته‌ها</h4><ul><li><a href="category.html?cat=کیف پارچه‌ای">کیف پارچه‌ای</a></li><li><a href="category.html?cat=کوله‌پشتی">کوله‌پشتی</a></li><li><a href="category.html?cat=کیف پلاستیکی">کیف پلاستیکی</a></li><li><a href="category.html?cat=کیف مدرسه">کیف مدرسه</a></li><li><a href="category.html?cat=ساک تبلیغاتی">ساک تبلیغاتی</a></li></ul></div>
       <div><h4>خدمات</h4><ul><li><a href="wholesale.html">سفارش عمده و پیش‌فاکتور</a></li><li><a href="index.html#faq">پرسش‌های متداول</a></li><li><a href="index.html">پیگیری سفارش</a></li></ul></div>
       <div><h4>تماس</h4><ul><li><a href="tel:+983133334455">۰۳۱-۳۳۳۳۴۴۵۵</a></li><li><a href="mailto:hello@sinabag.ir">hello@sinabag.ir</a></li><li>اصفهان، شهرک صنعتی</li></ul></div>
-      <div class="base" style="grid-column:1/-1"><span>© ۱۴۰۵ تولیدی کیف سینا — تمام حقوق محفوظ است.</span><span>سایت رسمی | نسخه ۱٫۶</span></div>
+      <div class="base" style="grid-column:1/-1"><span>© ۱۴۰۵ تولیدی کیف سینا — تمام حقوق محفوظ است.</span><span>سایت رسمی | نسخه ۱٫۷</span></div>
     </div></footer>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>

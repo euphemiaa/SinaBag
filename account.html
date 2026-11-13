@@ -103,7 +103,7 @@
         ords.forEach(function(x,i){
           var its='';(x.items||[]).forEach(function(it){
             its+='<div class="oi"><span>'+esc(it.name)+(it.color?' — '+esc(it.color):'')+' ×'+SB.fa(it.qty)+'</span><b>'+SB.money((it.price||0)*(it.qty||1))+'</b></div>';});
-          oh+='<div class="ocard"><div class="oh"><span class="ocode">'+esc(x.code)+'</span><span class="odate">'+esc(x.date||'')+'</span><span class="ostat">در حال آماده‌سازی در تولیدی</span></div>'
+          oh+='<div class="ocard"><div class="oh"><span class="ocode">'+esc(x.code)+'</span><span class="odate">'+esc(x.date||'')+'</span>'+(function(){var si=SB.statusInfo(x.status);return '<span class="ostat" style="background:'+si.b+';color:'+si.c+'">'+si.t+'</span>';})()+'</div>'
             +'<div class="oitems">'+its+'</div>'
             +'<div class="of"><span class="otot">'+SB.money(x.total||0)+' <small>تومان</small></span>'
             +'<span class="oact"><button class="btnsm" type="button" data-print="'+i+'">چاپ فاکتور</button><a class="btnsm" style="text-decoration:none" href="success.html">رسید پرداخت</a></span></div>'
@@ -153,7 +153,7 @@
       <div><h4>دسته‌ها</h4><ul><li><a href="category.html?cat=کیف پارچه‌ای">کیف پارچه‌ای</a></li><li><a href="category.html?cat=کوله‌پشتی">کوله‌پشتی</a></li><li><a href="category.html?cat=کیف پلاستیکی">کیف پلاستیکی</a></li><li><a href="category.html?cat=کیف مدرسه">کیف مدرسه</a></li><li><a href="category.html?cat=ساک تبلیغاتی">ساک تبلیغاتی</a></li></ul></div>
       <div><h4>خدمات</h4><ul><li><a href="wholesale.html">سفارش عمده و پیش‌فاکتور</a></li><li><a href="account.html">حساب کاربری و سفارش‌های من</a></li><li><a href="index.html#faq">پرسش‌های متداول</a></li><li><a href="index.html">پیگیری سفارش</a></li></ul></div>
       <div><h4>تماس</h4><ul><li><a href="tel:+983133334455">۰۳۱-۳۳۳۳۴۴۵۵</a></li><li><a href="mailto:hello@sinabag.ir">hello@sinabag.ir</a></li><li>اصفهان، شهرک صنعتی</li></ul></div>
-      <div class="base" style="grid-column:1/-1"><span>© ۱۴۰۵ تولیدی کیف سینا — تمام حقوق محفوظ است.</span><span>سایت رسمی | نسخه ۱٫۶</span></div>
+      <div class="base" style="grid-column:1/-1"><span>© ۱۴۰۵ تولیدی کیف سینا — تمام حقوق محفوظ است.</span><span>سایت رسمی | نسخه ۱٫۷</span></div>
     </div></footer>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>

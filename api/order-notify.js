@@ -5,11 +5,23 @@ let hourCount = 0, hourTs = 0;
 
 module.exports = async function (req, res) {
   if (req.method !== 'POST') return lib.ok(res, { ok: false, error: 'method' });
-  if (!lib.CFG.key || !lib.CFG.line) return lib.ok(res, { ok: false, error: 'sms-not-configured' });
 
   const b = await lib.readBody(req);
   const o = b.order || {};
+
+  /* coupon usage +1 (best-effort, privileged server-side call) */
+  if (b.coupon && process.env.SUPA_SECRET) {
+    const adm = require('./_admin');
+    const code = String(b.coupon).toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 24);
+    if (code) adm.sjson('/rest/v1/rpc/increment_coupon', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_code: code })
+    }).catch(function () {});
+  }
+
   const now = Date.now();
+  if (!lib.CFG.key || !lib.CFG.line) return lib.ok(res, { ok: false, error: 'sms-not-configured' });
   if (now - hourTs > 3600000) { hourTs = now; hourCount = 0; }
   if (++hourCount > 30) return lib.ok(res, { ok: false, error: 'rate' });
 

@@ -84,7 +84,7 @@
           (o.items||[]).forEach(function(it){
             its+='<div class="oi"><span>'+esc(it.name)+(it.color?' — '+esc(it.color):'')+' ×'+SB.fa(it.qty||1)+'</span><b>'+SB.money((it.price||0)*(it.qty||1))+'</b></div>';
           });
-          rows+='<div class="ocard"><div class="oh"><span class="ocode">'+esc(o.code)+'</span><span class="odate">'+esc(o.date||'')+'</span><span class="ostat">در حال آماده‌سازی در تولیدی</span></div>'
+          rows+='<div class="ocard"><div class="oh"><span class="ocode">'+esc(o.code)+'</span><span class="odate">'+esc(o.date||'')+'</span>'+(function(){var si=SB.statusInfo(o.status);return '<span class="ostat" style="background:'+si.b+';color:'+si.c+'">'+si.t+'</span>';})()+'</div>'
             +'<div class="oitems">'+its+'</div>'
             +'<div class="of"><span class="otot">'+SB.money(o.total||0)+' <small>تومان</small></span>'
             +'<span class="oact"><button class="btnsm" type="button" data-print="'+i+'">چاپ فاکتور</button></span></div>'
@@ -138,8 +138,25 @@
         var pg=box.querySelector('#promoGo'),pin=box.querySelector('#promoIn');
         if(pg)pg.addEventListener('click',function(){
           var v=SB.toEn(pin.value).trim().toUpperCase();
-          if(v==='SINA10'){SB.setPromo('SINA10');SB.toast('کد تخفیف ۱۰٪ اعمال شد ✓');render();}
-          else{SB.setPromo('');SB.toast('کد تخفیف معتبر نیست');render();}
+          if(!v){SB.setPromo('');SB.setPromoPct(0);SB.toast('کد تخفیف را وارد کنید');render();return;}
+          SB.toast('در حال بررسی کد تخفیف…');
+          try{
+            fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'coupon-check',code:v,sub:SB.subtotal()})})
+            .then(function(r){return r.json();}).then(function(d){
+              if(d&&d.ok){SB.setPromo(v);SB.setPromoPct(d.percent);SB.toast('کد تخفیف '+SB.fa(d.percent)+'٪ اعمال شد ✓');}
+              else{SB.setPromo('');SB.setPromoPct(0);
+                var rs=(d&&d.reason)||'';
+                SB.toast(rs==='min-total'?'این کد برای سبدهای بالای '+SB.money(d.min)+' تومان است':(rs==='expired'?'این کد منقضی شده است':(rs==='used-up'?'ظرفیت استفادهٔ این کد تکمیل شده است':'کد تخفیف معتبر نیست')));}
+              render();
+            }).catch(function(){
+              /* offline fallback: only the built-in code */
+              if(v==='SINA10'){SB.setPromo('SINA10');SB.setPromoPct(10);SB.toast('کد تخفیف ۱۰٪ اعمال شد ✓');}
+              else{SB.setPromo('');SB.setPromoPct(0);SB.toast('کد تخفیف معتبر نیست');}
+              render();
+            });
+          }catch(e){
+            if(v==='SINA10'){SB.setPromo('SINA10');SB.setPromoPct(10);SB.toast('کد تخفیف ۱۰٪ اعمال شد ✓');render();}
+          }
         });
         renderPrev();
       }
@@ -151,6 +168,8 @@
       render();
       /* pull this phone's order history from Supabase too (works after logout/login and on new devices) */
       SB.syncOrders(function(){renderPrev();});
+      /* re-render when the panel-edited catalog arrives */
+      SB.onProducts(render);
     })();
     </script><footer class="ft"><div class="wrap">
       <div><a href="index.html" style="display:flex;align-items:center;gap:10px"><svg viewBox="0 0 240 240" width="50" height="50" aria-label="لوگوی تولیدی کیف سینا">
@@ -182,7 +201,7 @@
       <div><h4>دسته‌ها</h4><ul><li><a href="category.html?cat=کیف پارچه‌ای">کیف پارچه‌ای</a></li><li><a href="category.html?cat=کوله‌پشتی">کوله‌پشتی</a></li><li><a href="category.html?cat=کیف پلاستیکی">کیف پلاستیکی</a></li><li><a href="category.html?cat=کیف مدرسه">کیف مدرسه</a></li><li><a href="category.html?cat=ساک تبلیغاتی">ساک تبلیغاتی</a></li></ul></div>
       <div><h4>خدمات</h4><ul><li><a href="wholesale.html">سفارش عمده و پیش‌فاکتور</a></li><li><a href="index.html#faq">پرسش‌های متداول</a></li><li><a href="index.html">پیگیری سفارش</a></li></ul></div>
       <div><h4>تماس</h4><ul><li><a href="tel:+983133334455">۰۳۱-۳۳۳۳۴۴۵۵</a></li><li><a href="mailto:hello@sinabag.ir">hello@sinabag.ir</a></li><li>اصفهان، شهرک صنعتی</li></ul></div>
-      <div class="base" style="grid-column:1/-1"><span>© ۱۴۰۵ تولیدی کیف سینا — تمام حقوق محفوظ است.</span><span>سایت رسمی | نسخه ۱٫۶</span></div>
+      <div class="base" style="grid-column:1/-1"><span>© ۱۴۰۵ تولیدی کیف سینا — تمام حقوق محفوظ است.</span><span>سایت رسمی | نسخه ۱٫۷</span></div>
     </div></footer>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>

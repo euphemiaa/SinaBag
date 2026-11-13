@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>پنل مدیریت | تولیدی کیف سینا</title>
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="stylesheet" href="style.css">
+<style>
+body{background:#F4EFE7}
+.lg{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.lgc{background:#FFFDF9;border:1px solid #E8DFCC;border-radius:18px;padding:34px 30px;width:340px;max-width:100%;box-shadow:0 12px 40px rgba(43,33,24,.08);text-align:center}
+.lgc h1{font-size:17px;color:#2B2118;margin:12px 0 2px}
+.lgc p{font-size:12px;color:#8A7660;margin-bottom:18px}
+.lgc input{width:100%;border:1px solid #DCD2C0;border-radius:10px;padding:11px 13px;font-family:inherit;font-size:14px;margin-bottom:12px;background:#FFF}
+.aerr{display:none;color:#A63A2E;font-size:12px;margin-top:10px}
+.back{display:block;margin-top:16px;font-size:12px;color:#8A7660;text-decoration:none}
+.atop{background:#2B2118;color:#FAF7F2;padding:12px 18px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.atop b{font-size:14.5px}
+.atop .sp{flex:1}
+.atop a,.atop button{font-size:12.5px;color:#F3C98B;text-decoration:none;background:none;border:1px solid rgba(243,201,139,.4);border-radius:9px;padding:6px 13px;font-family:inherit;cursor:pointer}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;padding:14px 18px 0;max-width:1080px;margin:0 auto}
+.tabs button{font-family:inherit;font-size:13px;font-weight:700;border:1px solid #DCD2C0;background:#FFF;color:#5C5147;border-radius:10px;padding:8px 16px;cursor:pointer}
+.tabs button.on{background:#9C5B2E;border-color:#9C5B2E;color:#FFF}
+.tbox{max-width:1080px;margin:0 auto;padding:16px 18px 60px}
+.ocard{background:#FFFDF9;border:1px solid #E8DFCC;border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.oh{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.ocode{font-weight:800;color:#9C5B2E;font-size:15px}
+.odate{font-size:12px;color:#8A7660}
+.ostatsel{font-family:inherit;font-size:12px;font-weight:700;border-radius:99px;padding:4px 12px;border:1px solid #DCD2C0;background:#FFF}
+.ocard .cust{font-size:13px;line-height:2.1;background:#F9F5EC;border-radius:10px;padding:8px 12px;margin:8px 0}
+.ocard .cust a{color:#9C5B2E;text-decoration:none;font-weight:700}
+.oitems{font-size:12.5px;line-height:2;border-top:1px dashed #E8DFCC;border-bottom:1px dashed #E8DFCC;padding:6px 0;margin:8px 0}
+.oitems .oi{display:flex;justify-content:space-between;gap:10px}
+.btnsm{cursor:pointer;border:1px solid #C9BBA4;background:#FFF;border-radius:10px;padding:6px 13px;font-family:inherit;font-size:12px;font-weight:700;color:#5C5147;text-decoration:none;display:inline-block}
+.btnsm:hover{background:#F6F1E6}
+.btnsm.pr{background:#9C5B2E;border-color:#9C5B2E;color:#FFF}
+.btnsm.dg{border-color:#E3B4AC;color:#A63A2E}
+.rrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:14px}
+.prow{background:#FFFDF9;border:1px solid #E8DFCC;border-radius:14px;padding:12px 14px;margin-bottom:10px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.prow img{width:52px;height:52px;object-fit:cover;border-radius:10px;border:1px solid #E8DFCC}
+.prow .pn{flex:1;min-width:150px}
+.prow .pn b{display:block;font-size:13.5px}
+.prow .pn span{font-size:11.5px;color:#8A7660}
+.pill{font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:99px}
+.pill.on{background:#EAF5EE;color:#1F7A45}
+.pill.off{background:#F1EAE0;color:#8A7660}
+.edf{background:#FFFDF9;border:1px solid #E8DFCC;border-radius:14px;padding:16px;margin-bottom:14px}
+.edf h3{font-size:14.5px;color:#9C5B2E;margin:0 0 12px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.fld2 label{display:block;font-size:11.5px;color:#8A7660;margin-bottom:4px}
+.fld2 input,.fld2 select,.fld2 textarea{width:100%;border:1px solid #DCD2C0;border-radius:10px;padding:9px 12px;font-family:inherit;font-size:13px;background:#FFF;box-sizing:border-box}
+.fld2.full{grid-column:1/-1}
+.fld2 textarea{min-height:74px;line-height:1.9}
+.chk2{display:flex;align-items:center;gap:7px;font-size:12.5px;color:#5C5147;margin-top:8px}
+.imgprev{width:64px;height:64px;object-fit:cover;border-radius:10px;border:1px solid #DCD2C0;vertical-align:middle}
+.mut{font-size:11.5px;color:#8A7660}
+.sums2{font-size:13px;font-weight:800;color:#9C5B2E}
+.emptyadm{text-align:center;padding:40px 10px;color:#8A7660;font-size:13px}
+</style>
+</head>
+<body>
+<div id="admBox"></div>
+<script src="products.js"></script>
+<script src="app.js"></script>
+<script>
+(function(){
+  var box=document.getElementById('admBox');
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function jdt(s){try{var d=new Date(String(s||'').replace(' ','T'));return d&&!isNaN(d)?SB.jdate(d):'';}catch(e){return '';}}
+  var CATS=['کیف پارچه‌ای','کوله‌پشتی','کیف پلاستیکی','کیف مدرسه','ساک تبلیغاتی'];
+  var STS={pending:'در حال آماده‌سازی',sewing:'در حال دوخت',shipped:'ارسال شد',delivered:'تحویل شد',canceled:'لغو شد'};
+
+  /* ---------- login ---------- */
+  function login(){
+    box.innerHTML='<div class="lg"><div class="lgc">'
+      +'<svg viewBox="0 0 240 240" width="60" height="60" aria-hidden="true"><g transform="translate(-41.56 -37.52) scale(1.34634)"><path d="M 66 96 C 66 38, 102 38, 102 96" fill="none" stroke="#9C5B2E" stroke-width="17" stroke-linecap="round"/><path d="M 138 96 C 138 38, 174 38, 174 96" fill="none" stroke="#9C5B2E" stroke-width="17" stroke-linecap="round"/><path d="M 56 90 L 184 90 Q 194 90 195 100 L 201 172 Q 202 190 182 190 L 58 190 Q 38 190 39 172 L 45 100 Q 46 90 56 90 Z" fill="#E7DCCB"/><g clip-path="url(#a)"><rect x="36" y="140" width="170" height="54" fill="#9C5B2E"/></g><defs><clipPath id="a"><path d="M 56 90 L 184 90 Q 194 90 195 100 L 201 172 Q 202 190 182 190 L 58 190 Q 38 190 39 172 L 45 100 Q 46 90 56 90 Z"/></clipPath></defs></g></svg>'
+      +'<h1>پنل مدیریت سینا</h1><p>ورود فقط برای مدیر تولیدی</p>'
+      +'<input id="apw" type="password" placeholder="رمز مدیریت" autocomplete="current-password">'
+      +'<button class="btnmain btnfull" id="ago" type="button">ورود به پنل</button>'
+      +'<div class="aerr" id="aerr"></div>'
+      +'<a class="back" href="index.html">← بازگشت به سایت</a></div></div>';
+    var pw=document.getElementById('apw'),err=document.getElementById('aerr');
+    function go(){
+      err.style.display='none';document.getElementById('ago').disabled=true;
+      fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'login',pass:pw.value})})
+      .then(function(r){document.getElementById('ago').disabled=false;if(r.ok){location.reload();}else{err.textContent='رمز اشتباه است — دوباره تلاش کنید';err.style.display='block';}})
+      .catch(function(){document.getElementById('ago').disabled=false;err.textContent='خطای شبکه — دوباره تلاش کنید';err.style.display='block';});
+    }
+    document.getElementById('ago').addEventListener('click',go);
+    pw.addEventListener('keydown',function(e){if(e.key==='Enter')go();});
+    pw.focus();
+  }
+
+  /* ---------- image picker (client-side resize, then upload) ---------- */
+  function pickImg(cb){
+    var inp=document.createElement('input');inp.type='file';inp.accept='image/*';
+    inp.onchange=function(){
+      var f=inp.files&&inp.files[0];if(!f)return;
+      var img=new Image();
+      img.onload=function(){
+        var mx=1200,sc=Math.min(1,mx/Math.max(img.width,img.height));
+        var c=document.createElement('canvas');c.width=Math.round(img.width*sc);c.height=Math.round(img.height*sc);
+        c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+        cb(c.toDataURL('image/jpeg',0.82),f.name.replace(/\.[^.]+$/,''));
+      };
+      img.src=URL.createObjectURL(f);
+    };
+    inp.click();
+  }
+  function upload(dataUrl,base,cb){
+    SB.toast('در حال آپلود عکس…');
+    fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'upload',name:base,data:dataUrl})})
+    .then(function(r){return r.json();}).then(function(d){cb(d.ok?d.url:null);});
+  }
+
+  /* ---------- shell ---------- */
+  var TABS=[['orders','سفارش‌ها'],['products','محصولات'],['posts','مجله'],['coupons','کد تخفیف'],['inquiries','استعلام‌ها']];
+  function panel(){
+    box.innerHTML='<div class="atop"><b>پنل مدیریت — تولیدی کیف سینا</b><span class="sp"></span>'
+      +'<a href="index.html" target="_blank">مشاهدهٔ سایت</a><button id="aout" type="button">خروج</button></div>'
+      +'<div class="tabs" id="atabs">'+TABS.map(function(t,i){return '<button type="button" data-t="'+t[0]+'"'+(i===0?' class="on"':'')+'>'+t[1]+'</button>';}).join('')+'</div>'
+      +'<div class="tbox" id="tabBox"></div>';
+    document.getElementById('aout').addEventListener('click',function(){fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'logout'})}).then(function(){location.reload();});});
+    document.getElementById('atabs').querySelectorAll('button').forEach(function(b){
+      b.addEventListener('click',function(){
+        document.getElementById('atabs').querySelectorAll('button').forEach(function(x){x.classList.remove('on');});
+        b.classList.add('on');openTab(b.getAttribute('data-t'));
+      });
+    });
+    openTab('orders');
+  }
+  function openTab(t){
+    if(t==='orders')loadOrders();
+    else if(t==='products')loadProducts();
+    else if(t==='posts')loadPosts();
+    else if(t==='coupons')loadCoupons();
+    else if(t==='inquiries')loadInquiries();
+  }
+
+  /* ---------- orders ---------- */
+  function orderCard(o,i,ords){
+    var its='';(o.items||[]).forEach(function(it){
+      its+='<div class="oi"><span>'+esc(it.name)+(it.color?' — '+esc(it.color):'')+' ×'+SB.fa(it.qty||1)+'</span><b>'+SB.money((it.price||0)*(it.qty||1))+'</b></div>';
+    });
+    var opts='';Object.keys(STS).forEach(function(k){opts+='<option value="'+k+'"'+(o.status===k?' selected':'')+'>'+STS[k]+'</option>';});
+    return '<div class="ocard"><div class="oh"><span class="ocode">'+esc(o.order_code)+'</span><span class="odate">'+jdt(o.created_at)+'</span>'
+      +'<select class="ostatsel" data-st="'+i+'">'+opts+'</select>'
+      +'<span class="sp" style="flex:1"></span>'
+      +'<button class="btnsm" type="button" data-print="'+i+'">چاپ فاکتور</button>'
+      +'<a class="btnsm" href="tel:'+esc(o.phone)+'">تماس با مشتری</a></div>'
+      +'<div class="cust"><b>'+esc(o.customer_name)+'</b> — '+esc(o.phone)
+      +'<br>'+esc(o.province)+'، '+esc(o.city)+' — '+esc(o.address)+(o.postal_code?' (کدپستی '+esc(o.postal_code)+')':'')
+      +(o.note?'<br>یادداشت مشتری: '+esc(o.note):'')+'</div>'
+      +'<div class="oitems">'+its+'</div>'
+      +'<div class="oh"><span class="sums2">'+SB.money(o.total||0)+' تومان</span>'
+      +'<span class="mut">(جمع '+SB.money(o.subtotal||0)+' + ارسال '+SB.money(o.shipping||0)+')</span></div></div>';
+  }
+  function bindOrders(ords){
+    box.querySelectorAll('[data-st]').forEach(function(s){
+      s.addEventListener('change',function(){
+        var o=ords[+s.getAttribute('data-st')];
+        fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'order-status',code:o.order_code,status:s.value})})
+        .then(function(r){return r.json();}).then(function(d){SB.toast(d.ok?'وضعیت سفارش '+o.order_code+' به «'+STS[s.value]+'» تغییر کرد':'تغییر وضعیت ناموفق بود');});
+      });
+    });
+    box.querySelectorAll('[data-print]').forEach(function(b){
+      b.addEventListener('click',function(){var x=SB.rowToLocal(ords[+b.getAttribute('data-print')]);if(x)SB.printInvoice(x);});
+    });
+  }
+  function loadOrders(){
+    var tb=document.getElementById('tabBox');
+    tb.innerHTML='<div class="toolbar"><button class="btnsm pr" id="oref" type="button">به‌روزرسانی</button><span class="mut" id="ocount"></span></div><div id="olist"><div class="emptyadm">در حال دریافت سفارش‌ها…</div></div>';
+    document.getElementById('oref').addEventListener('click',loadOrders);
+    fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'orders'})}).then(function(r){return r.json();}).then(function(d){
+      if(!d.ok){if(d.error==='no-session'){location.reload();return;}tb.querySelector('#olist').innerHTML='<div class="emptyadm">خطا در دریافت سفارش‌ها</div>';return;}
+      var ords=d.orders||[];
+      document.getElementById('ocount').textContent=SB.fa(ords.length)+' سفارش';
+      tb.querySelector('#olist').innerHTML=ords.length?ords.map(function(o,i){return orderCard(o,i,ords);}).join(''):'<div class="emptyadm">هنوز سفارشی ثبت نشده است</div>';
+      bindOrders(ords);
+    }).catch(function(){tb.querySelector('#olist').innerHTML='<div class="emptyadm">خطای شبکه</div>';});
+  }
+
+  /* ---------- products ---------- */
+  var PRO=null; /* product being edited */
+  function editorHTML(p,isNew){
+    return '<div class="edf" id="pEd"><h3>'+(isNew?'محصول جدید':'ویرایش محصول')+'</h3>'
+      +'<div class="fgrid">'
+      +'<div class="fld2"><label>نام محصول *</label><input id="pe_name" value="'+esc(p.name)+'"></div>'
+      +'<div class="fld2"><label>شناسه (لاتین، یکتا)</label><input id="pe_id" value="'+esc(p.id)+'"'+(isNew?'':' readonly style="background:#F6F1E6"')+'></div>'
+      +'<div class="fld2"><label>دسته</label><select id="pe_cat">'+CATS.map(function(c){return '<option'+(p.cat===c?' selected':'')+'>'+c+'</option>';}).join('')+'</select></div>'
+      +'<div class="fld2"><label>قیمت (تومان) *</label><input id="pe_price" inputmode="numeric" value="'+(p.price||'')+'"></div>'
+      +'<div class="fld2"><label>قیمت قبل از تخفیف (اختیاری)</label><input id="pe_old" inputmode="numeric" value="'+(p.old||'')+'"></div>'
+      +'<div class="fld2"><label>موجودی انبار</label><input id="pe_stock" inputmode="numeric" value="'+(p.stock||0)+'"></div>'
+      +'<div class="fld2"><label>ترتیب نمایش</label><input id="pe_sort" inputmode="numeric" value="'+(p.sort||100)+'"></div>'
+      +'<div class="fld2"><label>برچسب (مثل: پرفروش، جدید)</label><input id="pe_tag" value="'+esc(p.tag||'')+'"></div>'
+      +'<div class="fld2"><label>رنگ‌ها (با کاما جدا کنید)</label><input id="pe_colors" value="'+esc((p.colors||[]).join('، '))+'"></div>'
+      +'<div class="fld2"><label>عکس (نشانی یا آپلود)</label><div class="rrow"><input id="pe_img" value="'+esc(p.img||'')+'" style="flex:1;min-width:140px"><img class="imgprev" id="pe_imgv" src="'+esc(p.img||'img/favicon-64.png')+'" alt=""><button class="btnsm" id="pe_up" type="button">انتخاب عکس</button></div></div>'
+      +'<div class="fld2 full"><label>توضیحات</label><textarea id="pe_descr">'+esc(p.descr||p.desc||'')+'</textarea></div>'
+      +'<div class="fld2 full"><label>مشخصات فنی — هر خط: عنوان | مقدار</label><textarea id="pe_specs">'+esc((p.specs||[]).map(function(s){return s[0]+' | '+s[1];}).join('\n'))+'</textarea></div>'
+      +'</div>'
+      +'<div class="rrow" style="margin-top:12px"><label class="chk2"><input type="checkbox" id="pe_active"'+(p.active!==false?' checked':'')+'> نمایش در فروشگاه</label>'
+      +'<label class="chk2"><input type="checkbox" id="pe_inst"'+(p.inst?' checked':'')+'> فروش اقساطی</label>'
+      +'<span style="flex:1"></span>'
+      +'<button class="btnsm" id="pe_cancel" type="button">انصراف</button>'
+      +(isNew?'':'<button class="btnsm dg" id="pe_del" type="button">حذف محصول</button>')
+      +'<button class="btnsm pr" id="pe_save" type="button">ذخیره</button></div></div>';
+  }
+  function saveProduct(isNew){
+    var g=function(id){return document.getElementById(id);};
+    var p={id:(g('pe_id').value||'').trim(),name:g('pe_name').value.trim(),cat:g('pe_cat').value,
+      price:parseInt(SB.toEn(g('pe_price').value),10)||0,old:parseInt(SB.toEn(g('pe_old').value),10)||0,
+      stock:parseInt(SB.toEn(g('pe_stock').value),10)||0,sort:parseInt(SB.toEn(g('pe_sort').value),10)||100,
+      tag:g('pe_tag').value.trim(),img:g('pe_img').value.trim(),
+      colors:g('pe_colors').value.split(/[،,]/).map(function(s){return s.trim();}).filter(Boolean),
+      descr:g('pe_descr').value.trim(),
+      specs:g('pe_specs').value.split('\n').map(function(l){var a=l.split('|');return a.length>1?[a[0].trim(),a.slice(1).join('|').trim()]:null;}).filter(Boolean),
+      active:g('pe_active').checked,inst:g('pe_inst').checked};
+    if(!p.name){SB.toast('نام محصول را وارد کنید');return;}
+    if(!p.id){p.id='p-'+Date.now().toString(36);g('pe_id').value=p.id;}
+    if(!p.price){SB.toast('قیمت را وارد کنید');return;}
+    fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'save-product',p:p})})
+    .then(function(r){return r.json();}).then(function(d){SB.toast(d.ok?'محصول ذخیره شد — در سایت به‌روزرسانی می‌شود':'ذخیره ناموفق بود');if(d.ok)loadProducts();});
+  }
+  function loadProducts(){
+    var tb=document.getElementById('tabBox');
+    tb.innerHTML='<div class="toolbar"><button class="btnsm pr" id="pnew" type="button">+ محصول جدید</button><button class="btnsm" id="pref" type="button">به‌روزرسانی</button><span class="mut">تغییرات بلافاصله در سایت اعمال می‌شود</span></div><div id="plist"><div class="emptyadm">در حال دریافت…</div></div><div id="ped"></div>';
+    document.getElementById('pref').addEventListener('click',loadProducts);
+    document.getElementById('pnew').addEventListener('click',function(){
+      document.getElementById('ped').innerHTML=editorHTML({id:'',name:'',cat:CATS[0],price:'',old:'',stock:0,sort:100,colors:[],specs:[]},true);
+      wireEditor(true);document.getElementById('pEd').scrollIntoView({behavior:'smooth'});
+    });
+    fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'products'})}).then(function(r){return r.json();}).then(function(d){
+      var ps=d.products||[];
+      document.getElementById('plist').innerHTML=ps.length?ps.map(function(p){
+        return '<div class="prow"><img src="'+esc(p.img||'img/favicon-64.png')+'" alt=""><div class="pn"><b>'+esc(p.name)+'</b><span>'+esc(p.id)+' — '+esc(p.cat)+' — '+SB.money(p.price)+' تومان — موجودی '+SB.fa(p.stock||0)+'</span></div>'
+          +(p.active?'<span class="pill on">فعال</span>':'<span class="pill off">مخفی</span>')
+          +'<button class="btnsm" data-ed="'+esc(p.id)+'" type="button">ویرایش</button></div>';
+      }).join(''):'<div class="emptyadm">محصولی نیست — اولین محصول را بسازید</div>';
+      tb.querySelectorAll('[data-ed]').forEach(function(b){
+        b.addEventListener('click',function(){
+          var p=ps.filter(function(x){return x.id===b.getAttribute('data-ed');})[0];if(!p)return;
+          p.descr=p.descr||p.desc||'';
+          document.getElementById('ped').innerHTML=editorHTML(p,false);wireEditor(false);
+          document.getElementById('pEd').scrollIntoView({behavior:'smooth'});
+        });
+      });
+    });
+    function wireEditor(isNew){
+      document.getElementById('pe_cancel').addEventListener('click',function(){document.getElementById('ped').innerHTML='';});
+      document.getElementById('pe_save').addEventListener('click',function(){saveProduct(isNew);});
+      document.getElementById('pe_img').addEventListener('change',function(){document.getElementById('pe_imgv').src=this.value;});
+      var up=document.getElementById('pe_up');
+      if(up)up.addEventListener('click',function(){pickImg(function(dataUrl,base){if(!dataUrl)return;upload(dataUrl,base,function(url){if(url){document.getElementById('pe_img').value=url;document.getElementById('pe_imgv').src=url;SB.toast('عکس آپلود شد ✓');}});});});
+      var del=document.getElementById('pe_del');
+      if(del)del.addEventListener('click',function(){
+        var nm=document.getElementById('pe_name').value,pid=document.getElementById('pe_id').value;
+        if(!confirm('حذف «'+nm+'»؟'))return;
+        fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'save-product',del:true,id:pid})})
+        .then(function(r){return r.json();}).then(function(d){SB.toast(d.ok?'محصول حذف شد':'حذف ناموفق بود');loadProducts();});
+      });
+    }
+  }
+
+  /* ---------- posts (magazine) ---------- */
+  function loadPosts(){
+    var tb=document.getElementById('tabBox');
+    tb.innerHTML='<div class="toolbar"><button class="btnsm pr" id="bnew" type="button">+ پست جدید</button><button class="btnsm" id="bref" type="button">به‌روزرسانی</button></div><div id="blist"><div class="emptyadm">در حال دریافت…</div></div><div id="bed"></div>';
+    document.getElementById('bref').addEventListener('click',loadPosts);
+    document.getElementById('bnew').addEventListener('click',function(){editor(null);});
+    fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'posts'})}).then(function(r){return r.json();}).then(function(d){
+      var ps=d.posts||[];
+      document.getElementById('blist').innerHTML=ps.length?ps.map(function(p){
+        return '<div class="prow"><div class="pn"><b>'+esc(p.title)+'</b><span>post.html?slug='+esc(p.slug)+' — '+jdt(p.created_at)+'</span></div>'
+          +(p.published?'<span class="pill on">منتشرشده</span>':'<span class="pill off">پیش‌نویس</span>')
+          +'<button class="btnsm" data-bed="'+esc(p.slug)+'" type="button">ویرایش</button></div>';
+      }).join(''):'<div class="emptyadm">پستی نیست</div>';
+      tb.querySelectorAll('[data-bed]').forEach(function(b){
+        b.addEventListener('click',function(){editor(ps.filter(function(x){return x.slug===b.getAttribute('data-bed');})[0]||null);});
+      });
+    });
+    function editor(p){
+      p=p||{slug:'',title:'',excerpt:'',body:'',img:'',published:true};
+      document.getElementById('bed').innerHTML='<div class="edf" id="bEd"><h3>'+(p.slug?'ویرایش پست':'پست جدید')+'</h3>'
+        +'<div class="fgrid">'
+        +'<div class="fld2 full"><label>عنوان *</label><input id="be_title" value="'+esc(p.title)+'"></div>'
+        +'<div class="fld2"><label>نشانی (لاتین یا فارسی، بدون فاصله)</label><input id="be_slug" value="'+esc(p.slug)+'"></div>'
+        +'<div class="fld2"><label>خلاصه (اختیاری)</label><input id="be_excerpt" value="'+esc(p.excerpt||'')+'"></div>'
+        +'<div class="fld2 full"><label>عکس</label><div class="rrow"><input id="be_img" value="'+esc(p.img||'')+'" style="flex:1;min-width:140px"><img class="imgprev" id="be_imgv" src="'+esc(p.img||'img/favicon-64.png')+'" alt=""><button class="btnsm" id="be_up" type="button">انتخاب عکس</button></div></div>'
+        +'<div class="fld2 full"><label>متن (میتواند HTML باشد: h4، p، ul/li، b)</label><textarea id="be_body" style="min-height:220px">'+esc(p.body||'')+'</textarea></div>'
+        +'</div>'
+        +'<div class="rrow" style="margin-top:12px"><label class="chk2"><input type="checkbox" id="be_pub"'+(p.published?' checked':'')+'> منتشر شود</label>'
+        +'<span style="flex:1"></span><button class="btnsm" id="be_cancel" type="button">انصراف</button>'
+        +(p.slug?'<button class="btnsm dg" id="be_del" type="button">حذف</button>':'')
+        +'<button class="btnsm pr" id="be_save" type="button">ذخیره</button></div></div>';
+      document.getElementById('be_cancel').addEventListener('click',function(){document.getElementById('bed').innerHTML='';});
+      document.getElementById('be_up')&&document.getElementById('be_up').addEventListener('click',function(){pickImg(function(dataUrl,base){if(!dataUrl)return;upload(dataUrl,base,function(url){if(url){document.getElementById('be_img').value=url;document.getElementById('be_imgv').src=url;SB.toast('عکس آپلود شد ✓');}});});});
+      document.getElementById('be_save').addEventListener('click',function(){
+        var slug=document.getElementById('be_slug').value.trim()||document.getElementById('be_title').value.trim().replace(/\s+/g,'-');
+        var row={slug:slug,title:document.getElementById('be_title').value.trim(),excerpt:document.getElementById('be_excerpt').value.trim(),
+          body:document.getElementById('be_body').value,img:document.getElementById('be_img').value.trim(),published:document.getElementById('be_pub').checked};
+        if(!row.title){SB.toast('عنوان را وارد کنید');return;}
+        fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'save-post',p:row})})
+        .then(function(r){return r.json();}).then(function(d){SB.toast(d.ok?'پست ذخیره شد — post.html?slug='+d.slug:'ذخیره ناموفق بود');if(d.ok)loadPosts();});
+      });
+      var del=document.getElementById('be_del');
+      if(del)del.addEventListener('click',function(){
+        if(!confirm('حذف این پست؟'))return;
+        fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'save-post',del:true,slug:p.slug})})
+        .then(function(r){return r.json();}).then(function(d){SB.toast(d.ok?'پست حذف شد':'حذف ناموفق بود');loadPosts();});
+      });
+    }
+  }
+
+  /* ---------- coupons ---------- */
+  function loadCoupons(){
+    var tb=document.getElementById('tabBox');
+    tb.innerHTML='<div class="toolbar"><button class="btnsm pr" id="cnew" type="button">+ کد تخفیف جدید</button><button class="btnsm" id="cref" type="button">به‌روزرسانی</button></div><div id="clist"><div class="emptyadm">در حال دریافت…</div></div><div id="ced"></div>';
+    document.getElementById('cref').addEventListener('click',loadCoupons);
+    document.getElementById('cnew').addEventListener('click',function(){
+      document.getElementById('ced').innerHTML='<div class="edf"><h3>کد تخفیف جدید</h3><div class="fgrid">'
+        +'<div class="fld2"><label>کد (لاتین) *</label><input id="ce_code" placeholder="NOWRUZ"></div>'
+        +'<div class="fld2"><label>درصد تخفیف</label><input id="ce_pct" inputmode="numeric" value="10"></div>'
+        +'<div class="fld2"><label>سقف استفاده (۰ = بی‌نهایت)</label><input id="ce_max" inputmode="numeric" value="0"></div>'
+        +'<div class="fld2"><label>حداقل مبلغ سبد (تومان، ۰ = بدون حد)</label><input id="ce_min" inputmode="numeric" value="0"></div>'
+        +'<div class="fld2"><label>تاریخ انقضا (اختیاری)</label><input id="ce_exp" type="date"></div></div>'
+        +'<div class="rrow" style="margin-top:12px"><span style="flex:1"></span><button class="btnsm" id="ce_cancel" type="button">انصراف</button><button class="btnsm pr" id="ce_save" type="button">ذخیره</button></div></div>';
+      document.getElementById('ce_cancel').addEventListener('click',function(){document.getElementById('ced').innerHTML='';});
+      document.getElementById('ce_save').addEventListener('click',function(){
+        var p={code:document.getElementById('ce_code').value,percent:document.getElementById('ce_pct').value,
+          max_uses:document.getElementById('ce_max').value,min_total:document.getElementById('ce_min').value,
+          expires:document.getElementById('ce_exp').value?document.getElementById('ce_exp').value+'T23:59:59Z':null,active:true};
+        if(!p.code){SB.toast('کد را وارد کنید');return;}
+        fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'save-coupon',p:p})})
+        .then(function(r){return r.json();}).then(function(d){SB.toast(d.ok?'کد تخفیف ذخیره شد ✓':'ذخیره ناموفق بود');if(d.ok)loadCoupons();});
+      });
+    });
+    fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'coupons'})}).then(function(r){return r.json();}).then(function(d){
+      var cs=d.coupons||[];
+      document.getElementById('clist').innerHTML=cs.length?cs.map(function(c){
+        return '<div class="prow"><div class="pn"><b>'+esc(c.code)+' — '+SB.fa(c.percent)+'٪</b><span>استفاده: '+SB.fa(c.used||0)+(c.max_uses?(' از '+SB.fa(c.max_uses)):' (بی‌نهایت)')+(c.min_total?' — حداقل '+SB.money(c.min_total)+' تومان':'')+(c.expires?' — تا '+jdt(c.expires):'')+'</span></div>'
+          +(c.active?'<span class="pill on">فعال</span>':'<span class="pill off">غیرفعال</span>')
+          +'<button class="btnsm dg" data-cdel="'+esc(c.code)+'" type="button">حذف</button></div>';
+      }).join(''):'<div class="emptyadm">کدی نیست</div>';
+      tb.querySelectorAll('[data-cdel]').forEach(function(b){
+        b.addEventListener('click',function(){
+          if(!confirm('حذف کد '+b.getAttribute('data-cdel')+'؟'))return;
+          fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'save-coupon',del:true,code:b.getAttribute('data-cdel')})})
+          .then(function(r){return r.json();}).then(function(d){SB.toast(d.ok?'کد حذف شد':'حذف ناموفق بود');loadCoupons();});
+        });
+      });
+    });
+  }
+
+  /* ---------- inquiries ---------- */
+  var IST={new:'جدید',contacted:'تماس گرفته شد',closed:'بسته شد'};
+  function loadInquiries(){
+    var tb=document.getElementById('tabBox');
+    tb.innerHTML='<div class="toolbar"><button class="btnsm pr" id="iref" type="button">به‌روزرسانی</button></div><div id="ilist"><div class="emptyadm">در حال دریافت…</div></div>';
+    document.getElementById('iref').addEventListener('click',loadInquiries);
+    fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'inquiries'})}).then(function(r){return r.json();}).then(function(d){
+      var qs=d.inquiries||[];
+      var opts='';Object.keys(IST).forEach(function(k){opts+='<option value="'+k+'">'+IST[k]+'</option>';});
+      document.getElementById('ilist').innerHTML=qs.length?qs.map(function(q,i){
+        var o2=opts.replace('value="'+q.status+'"','value="'+q.status+'" selected');
+        return '<div class="ocard"><div class="oh"><span class="ocode">'+esc(q.name)+'</span><span class="odate">'+jdt(q.created_at)+'</span><span class="sp" style="flex:1"></span>'
+          +'<select class="ostatsel" data-ist="'+i+'">'+o2+'</select></div>'
+          +'<div class="cust"><a href="tel:'+esc(q.phone)+'">'+esc(q.phone)+'</a> — '+esc(q.product||'—')+'، تعداد '+SB.fa(q.qty||0)
+          +(q.color?(' — '+esc(q.color)):'')+(q.print_logo?' — با چاپ لوگو':'')
+          +(q.note?'<br>توضیح مشتری: '+esc(q.note):'')+'</div></div>';
+      }).join(''):'<div class="emptyadm">استعلامی ثبت نشده است</div>';
+      tb.querySelectorAll('[data-ist]').forEach(function(s){
+        s.addEventListener('change',function(){
+          var q=qs[+s.getAttribute('data-ist')];
+          fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'inquiry-status',id:q.id,status:s.value})})
+          .then(function(r){return r.json();}).then(function(d2){SB.toast(d2.ok?'وضعیت استعلام به‌روزرسانی شد':'خطا');});
+        });
+      });
+    });
+  }
+
+  fetch('/api/admin',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'session'})}).then(function(r){return r.json();}).then(function(s){s.ok?panel():login();}).catch(function(){login();});
+})();
+</script>
+</body>
+</html>

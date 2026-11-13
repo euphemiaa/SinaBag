@@ -9,6 +9,11 @@
   function save(k,v){try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}}
 
   var cart=load('sina_cart',[]);
+  /* apply the last DB catalog snapshot before first paint of dynamic pages */
+  try{var _pc=load('sina_products',null);if(_pc&&Array.isArray(_pc.list)&&_pc.list.length){
+    var _A=window.SB_PRODUCTS||[];_A.length=0;
+    _pc.list.forEach(function(p){if(p&&p.id&&p.name&&typeof p.price==='number')_A.push(p);});
+  }}catch(e){}
   function badge(){
     var b=document.getElementById('cartBadge');if(!b)return;
     var n=0;cart.forEach(function(i){n+=i.qty;});
@@ -28,7 +33,9 @@
   function subtotal(){var s=0;cart.forEach(function(i){var p=byId(i.id);if(p)s+=p.price*i.qty;});return s;}
   function promo(){return load('sina_promo','');}
   function setPromo(c){save('sina_promo',c||'');}
-  function discount(sub){return promo()==='SINA10'?Math.round(sub*0.1):0;}
+  function promoPct(){return load('sina_promo_pct',0);}
+  function setPromoPct(p){save('sina_promo_pct',Math.max(0,Math.min(90,p||0)));}
+  function discount(sub){var pct=promoPct()||(promo()==='SINA10'?10:0);return pct?Math.round(sub*pct/100):0;}
 
   /* completed-orders history (localStorage, newest first, capped) */
   function orders(){return load('sina_orders',[]);}
@@ -117,6 +124,59 @@
     }catch(e){if(cb)cb(orders());}
   }
 
+  /* ---- live catalog: products table in Supabase (panel-editable), static products.js as fallback ---- */
+  var prodSubs=[];
+  function onProducts(fn){if(typeof fn==='function')prodSubs.push(fn);}
+  function rowToProduct(r){
+    return {id:r.id,name:r.name,cat:r.cat,price:r.price,old:r.old||0,rating:r.rating||'۴٫۸',reviews:r.reviews||0,
+      img:r.img||'',tag:r.tag||'',inst:!!r.inst,colors:Array.isArray(r.colors)?r.colors:[],
+      desc:r.descr||'',specs:Array.isArray(r.specs)?r.specs:[],stock:r.stock||0};
+  }
+  /* patch the static index.html cards (name/price/old/tag) after the DB catalog arrives */
+  function syncIndexCards(){
+    var cards=document.querySelectorAll('.pcard[data-id]');
+    if(!cards.length)return;
+    cards.forEach(function(c){
+      var p=byId(c.getAttribute('data-id'));if(!p||!p.name)return;
+      c.setAttribute('data-price',p.price);c.setAttribute('data-old',p.old||'');c.setAttribute('data-cat',p.cat);c.setAttribute('data-name',p.name);
+      var pr=c.querySelector('.pprice');if(pr)pr.innerHTML=money(p.price)+' <small>تومان</small>';
+      var po=c.querySelector('.pold');
+      if(po){if(p.old&&p.old>p.price){po.textContent=money(p.old)+' تومان';po.style.display='';}else{po.style.display='none';}}
+      var tg=c.querySelector('.ptag');
+      if(tg){if(p.tag){tg.textContent=p.tag;tg.style.display='';}else{tg.style.display='none';}}
+      var nm=c.querySelector('.pname a');if(nm){nm.textContent=p.name;nm.setAttribute('href','product.html?id='+p.id);}
+    });
+  }
+  function refreshProducts(){
+    if(!SUPA.url)return;
+    try{
+      fetch(SUPA.url+'/rest/v1/products?select=*&active=eq.true&order=sort.asc',{headers:{'apikey':SUPA.key}})
+      .then(function(r){return r.ok?r.json():null;})
+      .then(function(list){
+        if(!Array.isArray(list)||!list.length)return;
+        var mapped=[];list.forEach(function(r){var p=rowToProduct(r);if(p.id&&p.name&&typeof p.price==='number')mapped.push(p);});
+        if(!mapped.length)return;
+        var key=JSON.stringify(mapped.map(function(p){return [p.id,p.price,p.old,p.name,p.tag,p.img,p.stock,p.active];}));
+        if(key===refreshProducts._k)return;refreshProducts._k=key;
+        save('sina_products',{ts:Date.now(),list:mapped});
+        var A=window.SB_PRODUCTS||[];A.length=0;mapped.forEach(function(p){A.push(p);});
+        window.SB_CATS=(function(){var m={};A.forEach(function(p){m[p.cat]=(m[p.cat]||0)+1;});return m;})();
+        syncIndexCards();
+        prodSubs.forEach(function(f){try{f();}catch(e){}});
+      }).catch(function(){});
+    }catch(e){}
+  }
+
+  /* ---- order status labels (shared by cart/account/admin cards) ---- */
+  var STMAP={
+    pending:{t:'در حال آماده‌سازی در تولیدی',c:'#1F7A45',b:'#EAF5EE'},
+    sewing:{t:'در حال دوخت در تولیدی',c:'#8A5A00',b:'#F7EEDA'},
+    shipped:{t:'ارسال شد',c:'#2E5E8C',b:'#E8F0F8'},
+    delivered:{t:'تحویل شد',c:'#3F7A63',b:'#EAF3EE'},
+    canceled:{t:'لغو شد',c:'#A63A2E',b:'#F8E9E7'}
+  };
+  function statusInfo(s){return STMAP[s]||STMAP.pending;}
+
   /* standalone printable invoice window (RTL, webfont) — shared by success + account pages */
   function printInvoice(o){
     var w=window.open('','_blank');
@@ -190,12 +250,15 @@
 
   window.SB={fa:fa,toEn:toEn,money:money,byId:byId,load:load,save:save,toast:toast,jdate:jdate,
     cart:cart,add:add,setQty:setQty,remove:remove,clear:clear,count:count,subtotal:subtotal,
-    promo:promo,setPromo:setPromo,discount:discount,orders:orders,myOrders:myOrders,pushOrder:pushOrder,printInvoice:printInvoice,
+    promo:promo,setPromo:setPromo,promoPct:promoPct,setPromoPct:setPromoPct,discount:discount,orders:orders,myOrders:myOrders,pushOrder:pushOrder,printInvoice:printInvoice,
     userLogin:userLogin,userLogout:userLogout,syncOrders:syncOrders,
+    onProducts:onProducts,refreshProducts:refreshProducts,rowToLocal:rowToLocal,statusInfo:statusInfo,
     user:function(){return load('sina_user',null);}};
 
   function bindCommon(){
     badge();
+    /* refresh catalog from the DB (panel edits reach every page without redeploy) */
+    refreshProducts();
     /* when logged in, profile buttons go to the account page instead of login */
     var u=load('sina_user',null);
     if(u){
