@@ -150,7 +150,7 @@
           }).then(function(r){o.db=r.status===201;return true;}).catch(function(){o.db=false;return false;})
             :Promise.resolve(false);
           var ntf=fetch('/api/order-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({order:{code:o.code,total:o.total,name:o.name,phone:o.phone,items:o.items.length}})}).catch(function(){return null;});
-          Promise.race([Promise.all([dbp,ntf]),new Promise(function(r2){setTimeout(r2,3500);})]).then(function(){SB.save('sina_order',o);SB.clear();SB.setPromo('');location.href='success.html';});
+          Promise.race([Promise.all([dbp,ntf]),new Promise(function(r2){setTimeout(r2,3500);})]).then(function(){SB.pushOrder(o);SB.save('sina_order',o);SB.clear();SB.setPromo('');location.href='success.html';});
         },1600);
       }
       render();wireCards();

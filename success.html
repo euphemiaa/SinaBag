@@ -85,8 +85,7 @@
         +'</div>'
         +'<div class="okbtns"><button class="btnghost" type="button" id="prGo">چاپ رسید</button><a class="btnmain" href="category.html">ادامهٔ خرید از فروشگاه ←</a><a class="btnghost" href="index.html">صفحهٔ اصلی</a></div>'
         +'</div>';
-      document.getElementById('prGo').addEventListener('click',function(){document.body.classList.add('print-inv');window.print();});
-      window.addEventListener('afterprint',function(){document.body.classList.remove('print-inv');});
+      document.getElementById('prGo').addEventListener('click',function(){SB.printInvoice(o);});
     })();
     </script><footer class="ft"><div class="wrap">
       <div><a href="index.html" style="display:flex;align-items:center;gap:10px"><svg viewBox="0 0 240 240" width="50" height="50" aria-label="لوگوی تولیدی کیف سینا">

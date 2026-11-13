@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>حساب کاربری | تولیدی کیف سینا</title>
+<meta name="description" content="مشخصات حساب شما و سفارش‌های ثبت‌شده با امکان چاپ فاکتور — تولیدی کیف سینا.">
+<meta name="theme-color" content="#FAF7F2">
+<link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
+<link rel="icon" type="image/png" sizes="64x64" href="img/favicon-64.png">
+<link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png">
+<link rel="apple-touch-icon" href="img/favicon-192.png">
+<link rel="stylesheet" href="style.css">
+<script src="products.js"></script>
+<script src="app.js"></script>
+<style>
+.ocard{background:#FFFDF9;border:1px solid #E8DFCC;border-radius:14px;padding:16px 18px;margin-bottom:14px}
+.ocard .oh{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.ocard .ocode{font-weight:800;color:#9C5B2E;font-size:15px}
+.ocard .odate{font-size:12px;color:#8A7660}
+.ostat{font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;background:#EAF5EE;color:#1F7A45}
+.oitems{font-size:13px;line-height:2;border-top:1px dashed #E8DFCC;border-bottom:1px dashed #E8DFCC;padding:8px 0;margin:8px 0}
+.oitems .oi{display:flex;justify-content:space-between;gap:10px}
+.oitems .oi span{color:#5C5147}
+.of{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.otot{font-weight:800;font-size:15px}
+.oact{display:flex;gap:8px;flex-wrap:wrap}
+.btnsm{cursor:pointer;border:1px solid #C9BBA4;background:#FFF;border-radius:10px;padding:7px 14px;font-family:inherit;font-size:12.5px;font-weight:700;color:#5C5147}
+.btnsm:hover{background:#F6F1E6}
+.acount{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.acard{flex:1;min-width:120px;background:#F6F1E6;border-radius:12px;padding:12px 14px;text-align:center}
+.acard b{display:block;font-size:17px;color:#9C5B2E}
+.acard span{font-size:11.5px;color:#8A7660}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <div class="tb-r"><a href="index.html#faq">خرید قسطی فعال شد — اسنپ‌پی و ترب‌پی</a><span style="opacity:.4">|</span><a href="index.html" title="پیگیری سفارش در صفحهٔ اصلی">پیگیری سفارش و کد مرسوله</a></div>
+  <div class="tb-soc" aria-label="پیام‌رسان‌ها">
+    <a class="soc-bl" href="#" data-toast="کانال بلهٔ تولیدی سینا: bale.ai/sinabag" title="بله" aria-label="بله">ب</a>
+    <a class="soc-tg" href="#" data-toast="کانال تلگرام: t.me/sinabag" title="تلگرام" aria-label="تلگرام"><svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></a>
+    <a class="soc-wa" href="#" data-toast="واتس‌اپ سفارش: ۰۹۱۳-۰۰۰-۰۰۰۰" title="واتس‌اپ" aria-label="واتس‌اپ"><svg viewBox="0 0 24 24" width="13" height="13" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg></a>
+  </div>
+</div></div><header class="hd"><div class="wrap"><div class="lk" style="display:flex;align-items:center;gap:10px"><a href="index.html" aria-label="صفحهٔ اصلی تولیدی کیف سینا"><svg viewBox="0 0 240 240" width="44" height="44" aria-label="لوگوی تولیدی کیف سینا">
+<title>لوگوی تولیدی کیف سینا</title>
+<g transform="translate(-41.56 -37.52) scale(1.34634)">
+<path d="M 66 96 C 66 38, 102 38, 102 96" fill="none" stroke="#9C5B2E" stroke-width="17" stroke-linecap="round"/>
+<path d="M 138 96 C 138 38, 174 38, 174 96" fill="none" stroke="#9C5B2E" stroke-width="17" stroke-linecap="round"/>
+<path d="M 56 90 L 184 90 Q 194 90 195 100 L 201 172 Q 202 190 182 190 L 58 190 Q 38 190 39 172 L 45 100 Q 46 90 56 90 Z" fill="#E7DCCB"/>
+<defs><clipPath id="b27p"><path d="M 56 90 L 184 90 Q 194 90 195 100 L 201 172 Q 202 190 182 190 L 58 190 Q 38 190 39 172 L 45 100 Q 46 90 56 90 Z"/></clipPath></defs>
+<g clip-path="url(#b27p)"><rect x="36" y="140" width="170" height="54" fill="#9C5B2E"/></g>
+<line x1="50.00" y1="140.00" x2="190.00" y2="140.00" stroke="#2B2118" stroke-opacity="0.9" stroke-width="3.6" stroke-dasharray="8 7" stroke-linecap="round"/>
+<circle cx="66" cy="96" r="7" fill="#FAF7F2"/><circle cx="66" cy="96" r="3" fill="#9C5B2E"/>
+<circle cx="102" cy="96" r="7" fill="#FAF7F2"/><circle cx="102" cy="96" r="3" fill="#9C5B2E"/>
+<circle cx="138" cy="96" r="7" fill="#FAF7F2"/><circle cx="138" cy="96" r="3" fill="#9C5B2E"/>
+<circle cx="174" cy="96" r="7" fill="#FAF7F2"/><circle cx="174" cy="96" r="3" fill="#9C5B2E"/>
+<line x1="84.00" y1="96.00" x2="80.00" y2="116.00" stroke="#2B2118" stroke-opacity="0.8" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+<line x1="120.00" y1="94.00" x2="120.00" y2="120.00" stroke="#2B2118" stroke-opacity="0.8" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+<line x1="156.00" y1="96.00" x2="160.00" y2="116.00" stroke="#2B2118" stroke-opacity="0.8" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+</g>
+</svg></a><div class="lk-txt"><a href="index.html" style="display:block"><span class="lk-name" style="font-size:20px;display:block">کیف سینا</span></a><span class="lk-sub" style="font-size:9.5px;display:block">تولیدی کیف پارچه‌ای و پلاستیکی</span></div></div>
+      <ul class="nav"><li><a href="index.html">خانه</a></li><li><a href="category.html">فروشگاه</a></li><li><a href="index.html#deals">حراج هفته</a></li><li><a href="index.html#blog">مجله</a></li><li><a href="wholesale.html">استعلام عمده</a></li><li><a href="index.html#about">درباره سینا</a></li><li><a href="index.html#contact">تماس</a></li></ul>
+      <div class="ic"><a class="b" href="cart.html" title="سبد خرید" aria-label="سبد خرید">🛒<span class="wlbadge" id="cartBadge"></span></a><a class="b" href="account.html" title="حساب کاربری" aria-label="حساب کاربری">👤</a></div><button class="mburger" id="burger" aria-label="منو" aria-controls="mnav">☰</button>
+    </div>
+    <nav class="mnav" id="mnav"><a href="index.html">خانه</a><a href="category.html">فروشگاه</a><a href="category.html?cat=کیف پارچه‌ای" style="padding-right:18px;font-size:13px;font-weight:600">— کیف پارچه‌ای</a><a href="category.html?cat=کوله‌پشتی" style="padding-right:18px;font-size:13px;font-weight:600">— کوله‌پشتی</a><a href="category.html?cat=کیف پلاستیکی" style="padding-right:18px;font-size:13px;font-weight:600">— کیف پلاستیکی</a><a href="category.html?cat=ساک تبلیغاتی" style="padding-right:18px;font-size:13px;font-weight:600">— ساک تبلیغاتی</a><a href="index.html#deals">حراج هفته</a><a href="index.html#blog">مجلهٔ سینا</a><a href="wholesale.html">استعلام قیمت عمده</a><a href="cart.html">سبد خرید</a><a href="account.html">حساب کاربری</a><a href="index.html#faq">پرسش‌های متداول</a><a href="index.html#about">درباره سینا</a><a href="index.html#contact">تماس</a></nav>
+  </header>
+<section class="wrap" style="padding-top:34px">
+      <div class="bc"><a href="index.html">خانه</a> <span aria-hidden="true">←</span> حساب کاربری</div>
+      <div class="whd"><h1>حساب کاربری</h1><p>مشخصات شما، خلاصهٔ خریدها و سفارش‌های ثبت‌شده با امکان چاپ فاکتور.</p></div>
+      <div id="accBox" style="margin-top:20px"></div>
+    </section>
+    <script>
+    (function(){
+      function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+      var u=SB.user();
+      if(!u){location.href='login.html';return;}
+      var ords=SB.orders();
+      var paidSum=0;ords.forEach(function(x){paidSum+=(x.total||0);});
+      var method=(u.otp||u.phone)?'ورود با شمارهٔ موبایل':((u.demo||u.email)?'حساب کاربر':'ورود انجام‌شده');
+      if(u.email)method='حساب ایمیل — '+esc(u.email);
+
+      var html='<div class="cartlay"><div>'
+        +'<div class="fbox"><h4>مشخصات من</h4>'
+        +'<div class="srow"><span>نام</span><b>'+esc(u.name||'کاربر سینا')+'</b></div>'
+        +'<div class="srow"><span>شمارهٔ موبایل</span><b>'+(u.phone?SB.fa(u.phone):'—')+'</b></div>'
+        +'<div class="srow"><span>نوع حساب</span><b>'+method+'</b></div>'
+        +'<div class="srow"><span>عضویت از</span><b>'+(u.ts?SB.jdate(new Date(u.ts)):SB.jdate())+'</b></div>'
+        +'<div class="acount"><div class="acard"><b>'+SB.fa(ords.length)+'</b><span>سفارش ثبت‌شده</span></div>'
+        +'<div class="acard"><b>'+SB.money(paidSum)+' <small>تومان</small></b><span>مجموع خریدها</span></div></div>'
+        +'<button class="btnghost btnfull" id="outGo" style="margin-top:14px">خروج از حساب</button>'
+        +'</div>'
+        +'<div class="fbox"><h4>میان‌برها</h4>'
+        +'<div class="srow"><span>🛒 سبد خرید</span><a href="cart.html">مشاهده ←</a></div>'
+        +'<div class="srow"><span>🛍 فروشگاه</span><a href="category.html">رفتن ←</a></div>'
+        +'<div class="srow"><span>📦 پیگیری سفارش</span><a href="index.html#hot">از صفحهٔ اصلی ←</a></div>'
+        +'</div></div>';
+
+      var oh='<aside class="sbox"><h3>سفارش‌های من</h3>';
+      if(!ords.length){
+        oh+='<div class="empty" style="margin-top:6px"><div class="ei">📦</div><h3>هنوز سفارشی ثبت نکرده‌اید</h3><p>اولین سفارش‌تان را از فروشگاه ثبت کنید؛ اینجا با فاکتور نمایش داده می‌شود.</p><a class="btnmain" href="category.html">رفتن به فروشگاه ←</a></div>';
+      } else {
+        ords.forEach(function(x,i){
+          var its='';(x.items||[]).forEach(function(it){
+            its+='<div class="oi"><span>'+esc(it.name)+(it.color?' — '+esc(it.color):'')+' ×'+SB.fa(it.qty)+'</span><b>'+SB.money((it.price||0)*(it.qty||1))+'</b></div>';});
+          oh+='<div class="ocard"><div class="oh"><span class="ocode">'+esc(x.code)+'</span><span class="odate">'+esc(x.date||'')+'</span><span class="ostat">در حال آماده‌سازی در تولیدی</span></div>'
+            +'<div class="oitems">'+its+'</div>'
+            +'<div class="of"><span class="otot">'+SB.money(x.total||0)+' <small>تومان</small></span>'
+            +'<span class="oact"><button class="btnsm" type="button" data-print="'+i+'">چاپ فاکتور</button><a class="btnsm" style="text-decoration:none" href="success.html">رسید پرداخت</a></span></div>'
+            +'</div>';
+        });
+      }
+      oh+='</aside>';
+      html+=oh+'</div>';
+      var box=document.getElementById('accBox');
+      box.innerHTML=html;
+      box.querySelectorAll('[data-print]').forEach(function(b){
+        b.addEventListener('click',function(){var x=ords[+b.getAttribute('data-print')];if(x)SB.printInvoice(x);});
+      });
+      document.getElementById('outGo').addEventListener('click',function(){try{localStorage.removeItem('sina_user');}catch(e){}SB.toast('از حساب خارج شدید');setTimeout(function(){location.href='index.html';},700);});
+    })();
+    </script><footer class="ft"><div class="wrap">
+      <div><a href="index.html" style="display:flex;align-items:center;gap:10px"><svg viewBox="0 0 240 240" width="50" height="50" aria-label="لوگوی تولیدی کیف سینا">
+<title>لوگوی تولیدی کیف سینا</title>
+<g transform="translate(-41.56 -37.52) scale(1.34634)">
+<path d="M 66 96 C 66 38, 102 38, 102 96" fill="none" stroke="#9C5B2E" stroke-width="17" stroke-linecap="round"/>
+<path d="M 138 96 C 138 38, 174 38, 174 96" fill="none" stroke="#9C5B2E" stroke-width="17" stroke-linecap="round"/>
+<path d="M 56 90 L 184 90 Q 194 90 195 100 L 201 172 Q 202 190 182 190 L 58 190 Q 38 190 39 172 L 45 100 Q 46 90 56 90 Z" fill="#E7DCCB"/>
+<defs><clipPath id="b27pf"><path d="M 56 90 L 184 90 Q 194 90 195 100 L 201 172 Q 202 190 182 190 L 58 190 Q 38 190 39 172 L 45 100 Q 46 90 56 90 Z"/></clipPath></defs>
+<g clip-path="url(#b27pf)"><rect x="36" y="140" width="170" height="54" fill="#9C5B2E"/></g>
+<line x1="50.00" y1="140.00" x2="190.00" y2="140.00" stroke="#2B2118" stroke-opacity="0.9" stroke-width="3.6" stroke-dasharray="8 7" stroke-linecap="round"/>
+<circle cx="66" cy="96" r="7" fill="#FAF7F2"/><circle cx="66" cy="96" r="3" fill="#9C5B2E"/>
+<circle cx="102" cy="96" r="7" fill="#FAF7F2"/><circle cx="102" cy="96" r="3" fill="#9C5B2E"/>
+<circle cx="138" cy="96" r="7" fill="#FAF7F2"/><circle cx="138" cy="96" r="3" fill="#9C5B2E"/>
+<circle cx="174" cy="96" r="7" fill="#FAF7F2"/><circle cx="174" cy="96" r="3" fill="#9C5B2E"/>
+<line x1="84.00" y1="96.00" x2="80.00" y2="116.00" stroke="#2B2118" stroke-opacity="0.8" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+<line x1="120.00" y1="94.00" x2="120.00" y2="120.00" stroke="#2B2118" stroke-opacity="0.8" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+<line x1="156.00" y1="96.00" x2="160.00" y2="116.00" stroke="#2B2118" stroke-opacity="0.8" stroke-width="3" stroke-dasharray="4 4" stroke-linecap="round"/>
+</g>
+</svg><span class="lk-txt" style="color:#FAF7F2;display:block"><span class="lk-name" style="font-size:20px;display:block">کیف سینا</span><span class="lk-sub" style="font-size:9.5px;color:#D8CFC2;display:block">تولیدی کیف پارچه‌ای و پلاستیکی</span></span></a><p style="font-size:13.5px;margin-top:14px;line-height:2">تولیدی کیف سینا؛ از پارچه تا پلاستیک، با دوخت صنعتی و قیمت تولیدی.</p><div class="soc" aria-label="پیام‌رسان‌ها">
+        <a class="soc-bl" href="#" data-toast="کانال بلهٔ تولیدی سینا: bale.ai/sinabag" aria-label="بله" title="بله">ب</a>
+        <a class="soc-tg" href="#" data-toast="کانال تلگرام: t.me/sinabag" aria-label="تلگرام" title="تلگرام"><svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg></a>
+        <a class="soc-wa" href="#" data-toast="واتس‌اپ سفارش: ۰۹۱۳-۰۰۰-۰۰۰۰" aria-label="واتس‌اپ" title="واتس‌اپ"><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413"/></svg></a>
+      </div><div class="badges">
+        <div class="badge"><span class="bi"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#F3C98B" stroke-width="2" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span><span><b>نماد اعتماد الکترونیکی</b>کد رسمی به‌زودی</span></div>
+        <div class="badge"><span class="bi"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#F3C98B" stroke-width="2" stroke-linecap="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></span><span><b>درگاه پرداخت امن</b>SSL — اسنپ‌پی / ترب‌پی</span></div>
+        <div class="badge"><span class="bi"><svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="#F3C98B" stroke-width="2" stroke-linecap="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>۷ روز ضمانت مرجوعی</b>+ گارانتی دوخت</span></div>
+      </div></div>
+      <div><h4>دسته‌ها</h4><ul><li><a href="category.html?cat=کیف پارچه‌ای">کیف پارچه‌ای</a></li><li><a href="category.html?cat=کوله‌پشتی">کوله‌پشتی</a></li><li><a href="category.html?cat=کیف پلاستیکی">کیف پلاستیکی</a></li><li><a href="category.html?cat=کیف مدرسه">کیف مدرسه</a></li><li><a href="category.html?cat=ساک تبلیغاتی">ساک تبلیغاتی</a></li></ul></div>
+      <div><h4>خدمات</h4><ul><li><a href="wholesale.html">چاپ اختصاصی</a></li><li><a href="wholesale.html">سفارش عمده و پیش‌فاکتور</a></li><li><a href="cart.html">سبد خرید</a></li><li><a href="account.html">حساب کاربری و سفارش‌های من</a></li><li><a href="index.html#faq">پرسش‌های متداول</a></li><li><a href="index.html">پیگیری سفارش</a></li></ul></div>
+      <div><h4>تماس</h4><ul><li><a href="tel:+983133334455">۰۳۱-۳۳۳۳۴۴۵۵</a></li><li><a href="mailto:hello@sinabag.ir">hello@sinabag.ir</a></li><li>اصفهان، شهرک صنعتی</li></ul></div>
+      <div class="base" style="grid-column:1/-1"><span>© ۱۴۰۵ تولیدی کیف سینا — تمام حقوق محفوظ است.</span><span>سایت رسمی | نسخه ۱٫۴</span></div>
+    </div></footer>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+(function(){
+  var burger=document.getElementById("burger"),mnav=document.getElementById("mnav");
+  burger.addEventListener("click",function(e){e.stopPropagation();mnav.classList.toggle("open");});
+  document.addEventListener("click",function(e){if(!mnav.contains(e.target)&&e.target!==burger)mnav.classList.remove("open");});
+  mnav.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){mnav.classList.remove("open");});});
+})();
+</script>
+</body>
+</html>

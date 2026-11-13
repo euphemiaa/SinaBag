@@ -30,6 +30,59 @@
   function setPromo(c){save('sina_promo',c||'');}
   function discount(sub){return promo()==='SINA10'?Math.round(sub*0.1):0;}
 
+  /* completed-orders history (localStorage, newest first, capped) */
+  function orders(){return load('sina_orders',[]);}
+  function pushOrder(o){var a=load('sina_orders',[]);a.unshift(o);if(a.length>50)a.length=50;save('sina_orders',a);return a;}
+
+  /* standalone printable invoice window (RTL, webfont) — shared by success + account pages */
+  function printInvoice(o){
+    var w=window.open('','_blank');
+    if(!w){toast('برای چاپ، اجازهٔ باز شدن پنجره را به سایت بدهید.');return;}
+    function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+    var rows='';
+    (o.items||[]).forEach(function(it){rows+='<tr><td>'+esc(it.name)+(it.color?' — '+esc(it.color):'')+'</td><td class="c">'+fa(it.qty)+'</td><td class="c">'+money(it.price)+'</td><td class="c">'+money(it.price*it.qty)+'</td></tr>';});
+    var logo=document.querySelector('.lk svg');
+    var base=location.protocol==='file:'?'.':location.origin;
+    var h='<!DOCTYPE html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><title>فاکتور فروش '+esc(o.code)+' — تولیدی کیف سینا</title><style>'
+      +'@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:400;src:url("'+base+'/fonts/Vazirmatn-Regular.woff2") format("woff2");}'
+      +'@font-face{font-family:"Vazirmatn";font-style:normal;font-weight:700;src:url("'+base+'/fonts/Vazirmatn-Bold.woff2") format("woff2");}'
+      +'*{margin:0;padding:0;box-sizing:border-box}'
+      +'body{font-family:"Vazirmatn",Tahoma,sans-serif;direction:rtl;color:#2B2118;padding:36px 40px;font-size:13px}'
+      +'.ph{display:flex;align-items:center;gap:14px;border-bottom:3px solid #9C5B2E;padding-bottom:16px}'
+      +'.tt{flex:1}.tt h1{font-size:20px;color:#9C5B2E}.tt span{font-size:11px;color:#8A7660}'
+      +'.meta{text-align:left;font-size:11.5px;line-height:2}.meta b{font-weight:700}'
+      +'.grid2{display:flex;gap:14px;margin:18px 0}'
+      +'.box{flex:1;border:1px solid #E0D5C0;border-radius:8px;padding:12px 14px;line-height:2.1;font-size:12px}'
+      +'.box h3{font-size:12.5px;color:#9C5B2E;margin-bottom:6px}'
+      +'table{width:100%;border-collapse:collapse;margin-top:6px}'
+      +'th{background:#F3EDE2;font-size:12px;padding:8px 10px;border:1px solid #E0D5C0}'
+      +'td{padding:8px 10px;border:1px solid #E8DFCC;font-size:12px}'
+      +'td.c{text-align:center;white-space:nowrap}'
+      +'.sums{margin-top:14px;display:flex;justify-content:flex-end}'
+      +'.sums table{width:340px}'
+      +'.sums td{border:none;padding:5px 10px;font-size:12.5px}'
+      +'.tot td{border-top:2px solid #9C5B2E;font-weight:700;font-size:14px;color:#9C5B2E}'
+      +'.fnote{margin-top:22px;font-size:11px;color:#8A7660;line-height:2;border-top:1px dashed #E0D5C0;padding-top:12px}'
+      +'</style></head><body>'
+      +'<div class="ph"><div style="width:56px">'+(logo?logo.outerHTML:'')+'</div><div class="tt"><h1>تولیدی کیف سینا</h1><span>کیف پارچه‌ای، کوله‌پشتی و کیف پلاستیکی — اصفهان، شهرک صنعتی | ۰۳۱-۳۳۳۳۴۴۵۵</span></div>'
+      +'<div class="meta"><b>فاکتور فروش</b><br>شمارهٔ سفارش: <b>'+esc(o.code)+'</b><br>تاریخ: '+esc(o.date)+'</div></div>'
+      +'<div class="grid2"><div class="box"><h3>مشخصات گیرنده</h3>نام: '+esc(o.name)+'<br>تلفن: '+esc(o.phone)+'<br>آدرس: '+esc(o.prv)+'، '+esc(o.city)+' — '+esc(o.addr)+(o.zip?'<br>کد پستی: '+esc(o.zip):'')+'</div>'
+      +'<div class="box"><h3>شرایط سفارش</h3>روش پرداخت: '+esc(o.pay&&o.pay.name)+'<br>روش ارسال: '+esc(o.ship&&o.ship.name)+' — '+((o.shipCost)?money(o.shipCost)+' تومان':'رایگان')+(o.note?'<br>یادداشت: '+esc(o.note):'')+'</div></div>'
+      +'<table><tr><th>کالا</th><th style="width:70px">تعداد</th><th style="width:130px">قیمت واحد (تومان)</th><th style="width:130px">مبلغ کل (تومان)</th></tr>'+rows+'</table>'
+      +'<div class="sums"><table>'
+      +'<tr><td>جمع کالاها</td><td class="c">'+money(o.sub||0)+' تومان</td></tr>'
+      +((o.disc)?'<tr><td>تخفیف'+(o.promo?' ('+esc(o.promo)+')':'')+'</td><td class="c">−'+money(o.disc)+' تومان</td></tr>':'')
+      +'<tr><td>هزینهٔ ارسال</td><td class="c">'+((o.shipCost)?money(o.shipCost)+' تومان':'رایگان')+'</td></tr>'
+      +'<tr class="tot"><td>مبلغ نهایی</td><td class="c">'+money(o.total||0)+' تومان</td></tr>'
+      +'</table></div>'
+      +'<div class="fnote">• این فاکتور پیش‌نمایش سفارش است؛ فاکتور رسمی با مالیات بر ارزش افزوده همراه کالا ارسال می‌شود.<br>• سفارش شما وارد صف دوخت تولیدی شد — برای هماهنگی با شما تماس گرفته می‌شود.<br>• تولیدی کیف سینا — sinabag.vercel.app</div>'
+      +'</body></html>';
+    w.document.write(h);w.document.close();
+    var pr=function(){try{w.focus();w.print();}catch(e){}};
+    if(w.document.fonts&&w.document.fonts.ready){w.document.fonts.ready.then(function(){setTimeout(pr,300);});}
+    else{setTimeout(pr,800);}
+  }
+
   function toast(m){
     var el=document.getElementById('toast');
     if(!el){el=document.createElement('div');el.className='toast';el.id='toast';el.setAttribute('role','status');el.setAttribute('aria-live','polite');document.body.appendChild(el);}
@@ -54,11 +107,17 @@
 
   window.SB={fa:fa,toEn:toEn,money:money,byId:byId,load:load,save:save,toast:toast,jdate:jdate,
     cart:cart,add:add,setQty:setQty,remove:remove,clear:clear,count:count,subtotal:subtotal,
-    promo:promo,setPromo:setPromo,discount:discount,
+    promo:promo,setPromo:setPromo,discount:discount,orders:orders,pushOrder:pushOrder,printInvoice:printInvoice,
     user:function(){return load('sina_user',null);}};
 
   function bindCommon(){
     badge();
+    /* when logged in, profile buttons go to the account page instead of login */
+    var u=load('sina_user',null);
+    if(u){
+      document.querySelectorAll('.ic a.b[href="login.html"]').forEach(function(a){a.setAttribute('href','account.html');a.setAttribute('title','حساب کاربری');a.setAttribute('aria-label','حساب کاربری');});
+      document.querySelectorAll('.mnav a[href="login.html"]').forEach(function(a){a.textContent='حساب کاربری';a.setAttribute('href','account.html');});
+    }
     document.querySelectorAll('[data-toast]').forEach(function(b){
       if(b.__sbT)return;b.__sbT=1;
       b.addEventListener('click',function(e){if(b.tagName==='A')e.preventDefault();toast(b.getAttribute('data-toast'));});
