@@ -11,6 +11,8 @@
 <link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png">
 <link rel="apple-touch-icon" href="img/favicon-192.png">
 <link rel="stylesheet" href="style.css">
+<script>window.SB_SUPA={url:"https://pcjmzutugtsqaqubcwmt.supabase.co",key:"sb_publishable_bW59Dhz3PsDB2Hv2wgZRRQ_KhuhRygm"};</script>
+<script src="supabase.js"></script>
 <script src="products.js"></script>
 <script src="app.js"></script>
 </head>
@@ -56,7 +58,7 @@
       </div>
       <div id="coBox"></div>
     </section>
-    <div class="gw" id="gw" role="alertdialog" aria-label="در حال اتصال به درگاه"><div class="gwbox"><div class="spin"></div>در حال اتصال به درگاه پرداخت…<div style="font-size:11px;color:#8A7660;font-weight:600;margin-top:8px">محیط نمایشی — چند لحظه صبر کنید</div></div></div>
+    <div class="gw" id="gw" role="alertdialog" aria-label="در حال ثبت سفارش"><div class="gwbox"><div class="spin"></div>در حال ثبت سفارش در سامانهٔ فروشگاه…<div style="font-size:11px;color:#8A7660;font-weight:600;margin-top:8px">ثبت فاکتور و ارسال پیامک تأیید — چند لحظه صبر کنید</div></div></div>
     <script>
     (function(){
       var SHIP=[['پیک اصفهان',60000,'تحویل همان‌روز تا فردا (فقط اصفهان)'],['پست پیشتاز',85000,'۲ تا ۴ روز کاری — به سراسر کشور'],['تیپاکس',110000,'۱ تا ۳ روز کاری — به سراسر کشور']];
@@ -84,7 +86,7 @@
           +'<div class="srow"><span>هزینهٔ ارسال — '+SHIP[st.ship][0]+'</span><b>'+(sc?'<s style="color:#B7A88F;font-weight:600;font-size:11px;margin-left:6px">'+SB.money(sc)+'</s>':'')+ (sc?SB.money(sc)+' تومان':'<span style="color:#1F7A45">رایگان ✓</span>')+'</b></div>'
           +(sc?'':'<div class="srow disc" style="font-size:11.5px"><span>ارسال بالای ۳٬۰۰۰٬۰۰۰ تومان</span><b>رایگان</b></div>')
           +'<div class="stotal"><span>مبلغ قابل پرداخت</span><span>'+SB.money(total)+' <small>تومان</small></span></div>'
-          +'<div class="pnote">• مالیات بر ارزش افزوده در فاکتور رسمی محاسبه می‌شود.<br>• این یک فروشگاه نمایشی است؛ پرداخت واقعی انجام نمی‌شود.</div></aside>';
+          +'<div class="pnote">• مالیات بر ارزش افزوده در فاکتور رسمی محاسبه می‌شود.<br>• سفارش شما در سامانهٔ فروشگاه ثبت می‌شود؛ برای هماهنگی پرداخت با شما تماس گرفته می‌شود.</div></aside>';
       }
       function shipCards(){
         var h='';
@@ -141,7 +143,15 @@
         var gw=document.getElementById('gw');
         document.getElementById('payBtn').disabled=true;
         gw.classList.add('on');
-        setTimeout(function(){SB.save('sina_order',o);SB.clear();SB.setPromo('');location.href='success.html';},1600);
+        setTimeout(function(){
+          // real persistence: Supabase orders table + SMS notifications (non-blocking, capped at 3.5s)
+          var dbp=(window.supabase&&window.SB_SUPA)?window.supabase.createClient(window.SB_SUPA.url,window.SB_SUPA.key)
+            .from('orders').insert({order_code:o.code,customer_name:o.name,phone:o.phone,province:o.prv,city:o.city,address:o.addr,postal_code:o.zip||null,note:o.note||null,items:o.items,subtotal:o.sub,shipping:o.shipCost,total:o.total,status:'pending'})
+            .then(function(r){o.db=!r.error;return true;}).catch(function(){o.db=false;return false;})
+            :Promise.resolve(false);
+          var ntf=fetch('/api/order-notify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({order:{code:o.code,total:o.total,name:o.name,phone:o.phone,items:o.items.length}})}).catch(function(){return null;});
+          Promise.race([Promise.all([dbp,ntf]),new Promise(function(r2){setTimeout(r2,3500);})]).then(function(){SB.save('sina_order',o);SB.clear();SB.setPromo('');location.href='success.html';});
+        },1600);
       }
       render();wireCards();
     })();
@@ -175,7 +185,7 @@
       <div><h4>دسته‌ها</h4><ul><li><a href="category.html?cat=کیف پارچه‌ای">کیف پارچه‌ای</a></li><li><a href="category.html?cat=کوله‌پشتی">کوله‌پشتی</a></li><li><a href="category.html?cat=کیف پلاستیکی">کیف پلاستیکی</a></li><li><a href="category.html?cat=کیف مدرسه">کیف مدرسه</a></li><li><a href="category.html?cat=ساک تبلیغاتی">ساک تبلیغاتی</a></li></ul></div>
       <div><h4>خدمات</h4><ul><li><a href="wholesale.html">چاپ اختصاصی</a></li><li><a href="wholesale.html">سفارش عمده و پیش‌فاکتور</a></li><li><a href="cart.html">سبد خرید</a></li><li><a href="login.html">ورود و ثبت‌نام</a></li><li><a href="index.html#faq">پرسش‌های متداول</a></li><li><a href="index.html">پیگیری سفارش</a></li></ul></div>
       <div><h4>تماس</h4><ul><li><a href="tel:+983133334455">۰۳۱-۳۳۳۳۴۴۵۵</a></li><li><a href="mailto:hello@sinabag.ir">hello@sinabag.ir</a></li><li>اصفهان، شهرک صنعتی</li></ul></div>
-      <div class="base" style="grid-column:1/-1"><span>© ۱۴۰۵ تولیدی کیف سینا — تمام حقوق محفوظ است.</span><span>سایت رسمی | نسخه ۱٫۳</span></div>
+      <div class="base" style="grid-column:1/-1"><span>© ۱۴۰۵ تولیدی کیف سینا — تمام حقوق محفوظ است.</span><span>سایت رسمی | نسخه ۱٫۴</span></div>
     </div></footer>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>

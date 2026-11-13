@@ -51,22 +51,27 @@
         <div class="acard">
           <h1 id="authTitle">به سینا خوش آمدید</h1>
           <div class="asub" id="authSub">برای پیگیری سریع‌تر سفارش‌ها و سابقهٔ خرید، وارد حساب خود شوید.</div>
-          <div class="atabs" role="tablist"><button class="on" data-pan="pIn" type="button">ورود</button><button data-pan="pUp" type="button">ثبت‌نام</button></div>
-          <div class="apane on" id="pIn">
-            <div class="ferr" id="inErr"></div>
-            <div class="frow"><div class="fld"><label for="inPhone">شمارهٔ موبایل</label><input id="inPhone" inputmode="numeric" placeholder="۰۹۱۲ ××× ××××"></div><div class="fld"><label for="inPass">رمز عبور</label><input id="inPass" type="password" placeholder="••••••••"></div></div>
-            <button class="btnmain btnfull" type="button" id="inGo">ورود به حساب</button>
-            <div class="alinks"><a href="#" id="forgot">فراموشی رمز عبور؟</a><a href="#" data-sw="pUp">حساب ندارید؟ ثبت‌نام</a></div>
+          <div id="otpStep1">
+            <div class="ferr" id="otErr"></div>
+            <div class="fld" style="margin-bottom:12px"><label for="otPhone">شمارهٔ موبایل</label><input id="otPhone" inputmode="numeric" placeholder="۰۹۱۲ ××× ××××"></div>
+            <label class="chk" style="margin-bottom:14px"><input type="checkbox" id="otTerms"> <span><a href="index.html#faq" style="color:#9C5B2E">قوانین و شرایط</a> تولیدی سینا را می‌پذیرم.</span></label>
+            <button class="btnmain btnfull" type="button" id="otSend">دریافت کد تأیید پیامکی</button>
+            <div class="alinks"><span style="font-size:11px;color:#8A7660">کد تا ۳ دقیقه اعتبار دارد — ورود و ثبت‌نام یکجا</span><span></span></div>
           </div>
-          <div class="apane" id="pUp">
-            <div class="ferr" id="upErr"></div>
-            <div class="frow"><div class="fld"><label for="upName">نام و نام خانوادگی</label><input id="upName" placeholder="مثلاً سارا محمدی"></div><div class="fld"><label for="upPhone">شمارهٔ موبایل</label><input id="upPhone" inputmode="numeric" placeholder="۰۹۱۲ ××× ××××"></div></div>
-            <div class="fld" style="margin-bottom:12px"><label for="upPass">رمز عبور (حداقل ۶ نویسه)</label><input id="upPass" type="password" placeholder="••••••••"></div>
-            <label class="chk" style="margin-bottom:14px"><input type="checkbox" id="upTerms"> <span><a href="index.html#faq" style="color:#9C5B2E">قوانین و شرایط</a> تولیدی سینا را می‌پذیرم.</span></label>
-            <button class="btnmain btnfull" type="button" id="upGo">ایجاد حساب کاربری</button>
-            <div class="alinks"><span></span><a href="#" data-sw="pIn">قبلاً ثبت‌نام کرده‌اید؟ ورود</a></div>
+          <div id="otpStep2" style="display:none">
+            <div class="ferr" id="otErr2"></div>
+            <div class="asub" style="text-align:right">کد ۶ رقمی به شمارهٔ <b id="otpShown"></b> پیامک شد.</div>
+            <div class="fld" style="margin-bottom:12px"><label for="otCode">کد تأیید</label><input id="otCode" inputmode="numeric" maxlength="6" placeholder="────────" style="text-align:center;letter-spacing:10px;font-size:19px;font-weight:800"></div>
+            <button class="btnmain btnfull" type="button" id="otGo">تأیید کد و ورود</button>
+            <div class="alinks"><a href="#" id="otEdit">ویرایش شماره</a><a href="#" id="otResend">ارسال دوبارهٔ کد</a></div>
           </div>
-          <div class="ahint">این یک محیط نمایشی است؛ اطلاعات فقط در مرورگر خودِ شما ذخیره می‌شود و به جایی ارسال نمی‌گردد. برای خرید عمده و پیش‌فاکتور، ثبت‌نام لازم نیست — از <a href="wholesale.html" style="color:#9C5B2E;font-weight:800">صفحهٔ استعلام عمده</a> استفاده کنید.</div>
+          <div id="otpStep3" style="display:none">
+            <div class="ferr" id="otErr3"></div>
+            <div class="asub" style="text-align:right">شمارهٔ شما تأیید شد ✓ — برای تکمیل ثبت‌نام نام‌تان را بنویسید.</div>
+            <div class="fld" style="margin-bottom:12px"><label for="otName">نام و نام خانوادگی</label><input id="otName" placeholder="مثلاً سارا محمدی"></div>
+            <button class="btnmain btnfull" type="button" id="otFinish">تکمیل ثبت‌نام و ورود</button>
+          </div>
+          <div class="ahint">ورود و ثبت‌نام با <b>کد پیامکی واقعی</b> انجام می‌شود؛ کد تا ۳ دقیقه اعتبار دارد. برای خرید عمده و پیش‌فاکتور، ثبت‌نام لازم نیست — از <a href="wholesale.html" style="color:#9C5B2E;font-weight:800">صفحهٔ استعلام عمده</a> استفاده کنید.</div>
         </div>
       </div>
     </section>
@@ -83,44 +88,65 @@
         document.getElementById('outGo').addEventListener('click',function(){try{localStorage.removeItem('sina_user');}catch(e){}SB.toast('از حساب خارج شدید');setTimeout(function(){location.reload();},700);});
         return;
       }
-      function show(pan){
-        document.querySelectorAll('.atabs button').forEach(function(b){b.classList.toggle('on',b.getAttribute('data-pan')===pan);});
-        document.querySelectorAll('.apane').forEach(function(x){x.classList.toggle('on',x.id===pan);});
-      }
-      document.querySelectorAll('.atabs button').forEach(function(b){b.addEventListener('click',function(){show(b.getAttribute('data-pan'));});});
-      document.querySelectorAll('[data-sw]').forEach(function(a){a.addEventListener('click',function(e){e.preventDefault();show(a.getAttribute('data-sw'));});});
-      document.getElementById('forgot').addEventListener('click',function(e){e.preventDefault();SB.toast('بازیابی رمز: با ۰۳۱-۳۳۳۳۴۴۵۵ تماس بگیرید');});
+      var tok='',ph='';
       function err(el,m){el.textContent=m;el.style.display='block';}
+      function hide(el){el.style.display='none';}
+      function step(n){['otpStep1','otpStep2','otpStep3'].forEach(function(id,i){document.getElementById(id).style.display=(i===n)?'block':'none';});}
       function phone(v){var s=SB.toEn(v).replace(/[^0-9]/g,'');return /^09[0-9]{9}$/.test(s)?s:null;}
-      document.getElementById('inGo').addEventListener('click',function(){
-        var e=document.getElementById('inErr');e.style.display='none';
-        var ph=phone(document.getElementById('inPhone').value);
-        var ps=document.getElementById('inPass').value;
+      function post(url,d){return fetch(url,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)}).then(function(r){return r.json();}).catch(function(){return {ok:false,error:'ارتباط با سرور برقرار نشد؛ اینترنت را بررسی کنید.'};});}
+      function startTimer(){
+        var a=document.getElementById('otResend'),t=60;
+        a.style.pointerEvents='none';a.style.opacity='.55';
+        var iv=setInterval(function(){t--;a.textContent='ارسال دوبارهٔ کد ('+SB.fa(t)+')';if(t<=0){clearInterval(iv);a.textContent='ارسال دوبارهٔ کد';a.style.pointerEvents='';a.style.opacity='';}},1000);
+      }
+      document.getElementById('otSend').addEventListener('click',function(){
+        var e=document.getElementById('otErr');hide(e);
+        ph=phone(document.getElementById('otPhone').value);
         if(!ph)return err(e,'شمارهٔ موبایل معتبر نیست — با ۰۹ شروع می‌شود و ۱۱ رقم است.');
-        if(ps.length<4)return err(e,'رمز عبور را وارد کنید.');
-        var name='کاربر سینا';
-        var acc=SB.load('sina_users',{});
-        if(acc[ph]&&acc[ph].name)name=acc[ph].name;
-        SB.save('sina_user',{name:name,phone:ph,ts:Date.now()});
-        SB.toast('خوش آمدید، '+name+' ✓');
-        setTimeout(function(){location.href='index.html';},900);
+        if(!document.getElementById('otTerms').checked)return err(e,'پذیرش قوانین برای دریافت کد لازم است.');
+        var btn=this;btn.disabled=true;btn.textContent='در حال ارسال…';
+        post('/api/otp-send',{phone:ph}).then(function(r){
+          btn.disabled=false;btn.textContent='دریافت کد تأیید پیامکی';
+          if(r.ok){
+            tok=r.token;
+            document.getElementById('otpShown').textContent=SB.fa(ph.slice(0,4)+'***'+ph.slice(7));
+            step(1);startTimer();document.getElementById('otCode').value='';document.getElementById('otCode').focus();
+          } else if(r.error==='sms-not-configured'){
+            err(e,'سرویس پیامک هنوز تنظیم نشده است — دکمهٔ زیر برای ورود نمایشی فعال شد. جهت فعال‌سازی با ۰۳۱-۳۳۳۳۴۴۵۵ تماس بگیرید.');
+            if(!document.getElementById('demoBtn')){
+              var f=document.createElement('button');f.className='btnghost btnfull';f.style.marginTop='10px';f.id='demoBtn';f.type='button';f.textContent='ورود نمایشی (بدون پیامک)';
+              f.addEventListener('click',function(){SB.save('sina_user',{name:'کاربر سینا',phone:ph,ts:Date.now(),demo:true});SB.toast('ورود نمایشی انجام شد');setTimeout(function(){location.href='index.html';},800);});
+              e.parentNode.appendChild(f);
+            }
+          } else err(e,r.error||'خطای نامشخص؛ دوباره تلاش کنید.');
+        });
       });
-      document.getElementById('upGo').addEventListener('click',function(){
-        var e=document.getElementById('upErr');e.style.display='none';
-        var nm=document.getElementById('upName').value.trim();
-        var ph=phone(document.getElementById('upPhone').value);
-        var ps=document.getElementById('upPass').value;
+      document.getElementById('otResend').addEventListener('click',function(e){e.preventDefault();document.getElementById('otSend').click();});
+      document.getElementById('otEdit').addEventListener('click',function(e){e.preventDefault();step(0);});
+      document.getElementById('otGo').addEventListener('click',function(){
+        var e=document.getElementById('otErr2');hide(e);
+        var c=SB.toEn(document.getElementById('otCode').value).replace(/[^0-9]/g,'');
+        if(c.length!==6)return err(e,'کد ۶ رقمی را کامل وارد کنید.');
+        var btn=this;btn.disabled=true;btn.textContent='در حال بررسی…';
+        post('/api/otp-verify',{phone:ph,code:c,token:tok}).then(function(r){
+          btn.disabled=false;btn.textContent='تأیید کد و ورود';
+          if(!r.ok)return err(e,r.error||'کد تأیید نشد.');
+          var acc=SB.load('sina_users',{});
+          if(acc[ph]&&acc[ph].name){finish(acc[ph].name);}else{step(2);}
+        });
+      });
+      document.getElementById('otFinish').addEventListener('click',function(){
+        var e=document.getElementById('otErr3');hide(e);
+        var nm=document.getElementById('otName').value.trim();
         if(nm.length<3)return err(e,'نام و نام خانوادگی را کامل وارد کنید.');
-        if(!ph)return err(e,'شمارهٔ موبایل معتبر نیست — با ۰۹ شروع می‌شود و ۱۱ رقم است.');
-        if(ps.length<6)return err(e,'رمز عبور باید حداقل ۶ نویسه باشد.');
-        if(!document.getElementById('upTerms').checked)return err(e,'پذیرش قوانین برای ثبت‌نام لازم است.');
-        var acc=SB.load('sina_users',{});
-        if(acc[ph])return err(e,'این شماره قبلاً ثبت‌نام کرده — از فرم ورود استفاده کنید.');
-        acc[ph]={name:nm,ts:Date.now()};SB.save('sina_users',acc);
-        SB.save('sina_user',{name:nm,phone:ph,ts:Date.now()});
-        SB.toast('حساب شما ساخته شد؛ خوش آمدید، '+nm+' ✓');
-        setTimeout(function(){location.href='index.html';},900);
+        finish(nm);
       });
+      function finish(nm){
+        var acc=SB.load('sina_users',{});acc[ph]={name:nm,ts:Date.now()};SB.save('sina_users',acc);
+        SB.save('sina_user',{name:nm,phone:ph,ts:Date.now(),otp:true});
+        SB.toast('خوش آمدید، '+nm+' ✓');
+        setTimeout(function(){location.href='index.html';},900);
+      }
     })();
     </script><footer class="ft"><div class="wrap">
       <div><a href="index.html" style="display:flex;align-items:center;gap:10px"><svg viewBox="0 0 240 240" width="50" height="50" aria-label="لوگوی تولیدی کیف سینا">
@@ -152,7 +178,7 @@
       <div><h4>دسته‌ها</h4><ul><li><a href="category.html?cat=کیف پارچه‌ای">کیف پارچه‌ای</a></li><li><a href="category.html?cat=کوله‌پشتی">کوله‌پشتی</a></li><li><a href="category.html?cat=کیف پلاستیکی">کیف پلاستیکی</a></li><li><a href="category.html?cat=کیف مدرسه">کیف مدرسه</a></li><li><a href="category.html?cat=ساک تبلیغاتی">ساک تبلیغاتی</a></li></ul></div>
       <div><h4>خدمات</h4><ul><li><a href="wholesale.html">چاپ اختصاصی</a></li><li><a href="wholesale.html">سفارش عمده و پیش‌فاکتور</a></li><li><a href="cart.html">سبد خرید</a></li><li><a href="login.html">ورود و ثبت‌نام</a></li><li><a href="index.html#faq">پرسش‌های متداول</a></li><li><a href="index.html">پیگیری سفارش</a></li></ul></div>
       <div><h4>تماس</h4><ul><li><a href="tel:+983133334455">۰۳۱-۳۳۳۳۴۴۵۵</a></li><li><a href="mailto:hello@sinabag.ir">hello@sinabag.ir</a></li><li>اصفهان، شهرک صنعتی</li></ul></div>
-      <div class="base" style="grid-column:1/-1"><span>© ۱۴۰۵ تولیدی کیف سینا — تمام حقوق محفوظ است.</span><span>سایت رسمی | نسخه ۱٫۳</span></div>
+      <div class="base" style="grid-column:1/-1"><span>© ۱۴۰۵ تولیدی کیف سینا — تمام حقوق محفوظ است.</span><span>سایت رسمی | نسخه ۱٫۴</span></div>
     </div></footer>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>
