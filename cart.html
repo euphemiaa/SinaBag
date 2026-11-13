@@ -93,11 +93,17 @@
         var more=(ords.length>MAX)?'<div class="pmore">'+SB.fa(ords.length-MAX)+' سفارش دیگر در <a href="account.html">حساب کاربری</a> شما ثبت است.</div>':'';
         return '<section class="prevbox" id="prevBox"><div class="phd"><h2>سفارش‌های قبلی شما</h2><a href="account.html">مشاهدهٔ همه در حساب کاربری ←</a></div>'+rows+more+'</section>';
       }
+      function renderPrev(){
+        var w=document.getElementById('prevWrap');
+        if(!w)return;
+        w.innerHTML=prevOrders();
+        bindPrint();
+      }
       function render(){
         var box=document.getElementById('cartBox');
         if(!SB.cart.length){
-          box.innerHTML='<div class="empty"><div class="ei">🛒</div><h3>سبد خرید شما خالی است</h3><p>هنوز چیزی انتخاب نکرده‌اید؛ از فروشگاه سینا شروع کنید — از توت‌بگ و ساک تا کوله‌پشتی و کیف پلاستیکی.</p><a class="btnmain" href="category.html">رفتن به فروشگاه ←</a> <a class="btnghost" style="margin-right:8px" href="index.html#hot">پرفروش‌های سینا</a></div>'+prevOrders();
-          bindPrint();return;
+          box.innerHTML='<div class="empty"><div class="ei">🛒</div><h3>سبد خرید شما خالی است</h3><p>هنوز چیزی انتخاب نکرده‌اید؛ از فروشگاه سینا شروع کنید — از توت‌بگ و ساک تا کوله‌پشتی و کیف پلاستیکی.</p><a class="btnmain" href="category.html">رفتن به فروشگاه ←</a> <a class="btnghost" style="margin-right:8px" href="index.html#hot">پرفروش‌های سینا</a></div><div id="prevWrap"></div>';
+          renderPrev();return;
         }
         var items='';
         SB.cart.forEach(function(it,i){
@@ -124,7 +130,7 @@
           +'<div class="stotal"><span>مبلغ قابل پرداخت</span><span>'+SB.money(total)+' <small>تومان</small></span></div>'
           +'<a class="btnmain btnfull" style="margin-top:16px" href="checkout.html">ادامهٔ ثبت سفارش ←</a>'
           +'<div class="pnote">• ارسال رایگان برای سفارش‌های بالای ۳٬۰۰۰٬۰۰۰ تومان<br>• فاکتور رسمی پس از تماس کارشناس صادر می‌شود<br>• پرداخت اقساطی با اسنپ‌پی و ترب‌پی فعال است</div></aside>';
-        box.innerHTML='<div class="cartlay"><div>'+items+'<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px"><a class="btnghost" href="category.html">ادامهٔ خرید</a><a class="btnghost" href="index.html">صفحهٔ اصلی</a></div></div>'+side+'</div>'+prevOrders();
+        box.innerHTML='<div class="cartlay"><div>'+items+'<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:6px"><a class="btnghost" href="category.html">ادامهٔ خرید</a><a class="btnghost" href="index.html">صفحهٔ اصلی</a></div></div>'+side+'</div><div id="prevWrap"></div>';
         box.querySelectorAll('[data-inc]').forEach(function(b){b.addEventListener('click',function(){var i=+b.getAttribute('data-inc');SB.setQty(i,SB.cart[i].qty+1);render();});});
         box.querySelectorAll('[data-dec]').forEach(function(b){b.addEventListener('click',function(){var i=+b.getAttribute('data-dec');SB.setQty(i,SB.cart[i].qty-1);render();});});
         box.querySelectorAll('[data-qty]').forEach(function(inp){inp.addEventListener('change',function(){var i=+inp.getAttribute('data-qty');var q=parseInt(SB.toEn(inp.value),10);if(isNaN(q)){render();return;}SB.setQty(i,q);render();});});
@@ -135,7 +141,7 @@
           if(v==='SINA10'){SB.setPromo('SINA10');SB.toast('کد تخفیف ۱۰٪ اعمال شد ✓');render();}
           else{SB.setPromo('');SB.toast('کد تخفیف معتبر نیست');render();}
         });
-        bindPrint();
+        renderPrev();
       }
       function bindPrint(){
         document.querySelectorAll('#cartBox [data-print]').forEach(function(b){
@@ -143,6 +149,8 @@
         });
       }
       render();
+      /* pull this phone's order history from Supabase too (works after logout/login and on new devices) */
+      SB.syncOrders(function(){renderPrev();});
     })();
     </script><footer class="ft"><div class="wrap">
       <div><a href="index.html" style="display:flex;align-items:center;gap:10px"><svg viewBox="0 0 240 240" width="50" height="50" aria-label="لوگوی تولیدی کیف سینا">
@@ -174,7 +182,7 @@
       <div><h4>دسته‌ها</h4><ul><li><a href="category.html?cat=کیف پارچه‌ای">کیف پارچه‌ای</a></li><li><a href="category.html?cat=کوله‌پشتی">کوله‌پشتی</a></li><li><a href="category.html?cat=کیف پلاستیکی">کیف پلاستیکی</a></li><li><a href="category.html?cat=کیف مدرسه">کیف مدرسه</a></li><li><a href="category.html?cat=ساک تبلیغاتی">ساک تبلیغاتی</a></li></ul></div>
       <div><h4>خدمات</h4><ul><li><a href="wholesale.html">سفارش عمده و پیش‌فاکتور</a></li><li><a href="index.html#faq">پرسش‌های متداول</a></li><li><a href="index.html">پیگیری سفارش</a></li></ul></div>
       <div><h4>تماس</h4><ul><li><a href="tel:+983133334455">۰۳۱-۳۳۳۳۴۴۵۵</a></li><li><a href="mailto:hello@sinabag.ir">hello@sinabag.ir</a></li><li>اصفهان، شهرک صنعتی</li></ul></div>
-      <div class="base" style="grid-column:1/-1"><span>© ۱۴۰۵ تولیدی کیف سینا — تمام حقوق محفوظ است.</span><span>سایت رسمی | نسخه ۱٫۵</span></div>
+      <div class="base" style="grid-column:1/-1"><span>© ۱۴۰۵ تولیدی کیف سینا — تمام حقوق محفوظ است.</span><span>سایت رسمی | نسخه ۱٫۶</span></div>
     </div></footer>
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <script>

@@ -75,6 +75,48 @@
     return u;
   }
 
+  /* ---- cloud order history (Supabase RPC get_orders_by_phone, anon-safe security-definer fn) ---- */
+  var SUPA=window.SB_SUPA||{url:'https://pcjmzutugtsqaqubcwmt.supabase.co',key:'sb_publishable_bW59Dhz3PsDB2Hv2wgZRRQ_KhuhRygm'};
+  function rowToLocal(r){
+    var d=null;try{d=new Date(String(r.created_at||'').replace(' ','T'));}catch(e){}
+    return {code:r.order_code||'',date:(d&&!isNaN(d.getTime()))?jdate(d):'',
+      name:r.customer_name||'',phone:r.phone||'',uphone:r.phone||'',
+      prv:r.province||'',city:r.city||'',addr:r.address||'',zip:'',note:r.note||'',
+      items:Array.isArray(r.items)?r.items:[],
+      sub:r.subtotal||0,disc:0,shipCost:r.shipping||0,
+      pay:{name:'ثبت‌شده در سایت'},ship:{name:'ارسال با هماهنگی تولیدی'},
+      total:r.total||0,status:r.status||'pending',cloud:true};
+  }
+  function orderTs(o){
+    var t=String(o&&o.date||'').replace(/[۰-۹]/g,function(d){return String(PALN.indexOf(d));}).split('/').join('');
+    var n=parseInt(t,10);return isNaN(n)?0:n;
+  }
+  /* pull this phone's orders from Supabase, merge into local history (dedupe by order code) */
+  function syncOrders(cb){
+    var u=load('sina_user',null);
+    if(!u||!u.phone||!SUPA.url){if(cb)cb(orders());return;}
+    try{
+      fetch(SUPA.url+'/rest/v1/rpc/get_orders_by_phone',{
+        method:'POST',
+        headers:{'apikey':SUPA.key,'Content-Type':'application/json'},
+        body:JSON.stringify({p_phone:u.phone})
+      }).then(function(r){return r.ok?r.json():[];}).then(function(list){
+        if(Array.isArray(list)&&list.length){
+          var a=orders(),seen={},i;
+          for(i=0;i<a.length;i++)if(a[i].code)seen[a[i].code]=1;
+          for(i=0;i<list.length;i++){
+            var o=rowToLocal(list[i]);
+            if(o.code&&!seen[o.code]){a.push(o);seen[o.code]=1;}
+          }
+          a.sort(function(x,y){return orderTs(y)-orderTs(x);});
+          if(a.length>100)a.length=100;
+          save('sina_orders',a);
+        }
+        if(cb)cb(orders());
+      }).catch(function(){if(cb)cb(orders());});
+    }catch(e){if(cb)cb(orders());}
+  }
+
   /* standalone printable invoice window (RTL, webfont) — shared by success + account pages */
   function printInvoice(o){
     var w=window.open('','_blank');
@@ -149,7 +191,7 @@
   window.SB={fa:fa,toEn:toEn,money:money,byId:byId,load:load,save:save,toast:toast,jdate:jdate,
     cart:cart,add:add,setQty:setQty,remove:remove,clear:clear,count:count,subtotal:subtotal,
     promo:promo,setPromo:setPromo,discount:discount,orders:orders,myOrders:myOrders,pushOrder:pushOrder,printInvoice:printInvoice,
-    userLogin:userLogin,userLogout:userLogout,
+    userLogin:userLogin,userLogout:userLogout,syncOrders:syncOrders,
     user:function(){return load('sina_user',null);}};
 
   function bindCommon(){
